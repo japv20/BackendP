@@ -53,28 +53,6 @@ const meals = [
   }
 ]
 
-const projects = [
-  {name:'Food Ordering from Single Restaurant'},
-	{name:'Commerce App'}
-]
-
-app.get('/projects', (req, res) => {
-  res.json(projects)
-})
-
-// app.get('/projects', async(req, res) => {
-//   let {data: meals, error} = await supabase
-//   .from('meals')
-//   .select('name')
-//   res.json(meals)
-//   console.log(error)
-//   res.sendStatus(200)
-// })
-
-// app.get('/meals', (req, res) => {
-//   res.json(meals);
-// })
-
 app.get('/meals', async(req, res) => {
   let {data: meals, error} = await supabase
   .from('meals')
@@ -83,44 +61,20 @@ app.get('/meals', async(req, res) => {
 
   meals.forEach((meal) => {
     let detailedMeal = new Plate(meal.name,meal.description,meal.price)
-    console.log(detailedMeal);
+    // console.log(detailedMeal);
   })
 })
 
-app.post('/projects', (req, res) => {
-  console.log(`Project: ${req.body.project}`)
-  // get name and creator of project
-  //create object and add to list
-  //return list of projects
-  projects.push(req.body.project)
-  res.json(projects)
-  // console.log(req.body);
-  // const userInput = req.body;
-  // projects.push(userInput)
-  res.status(201).send('Project added');
-})
-
-// app.post('/meals', (req, res) => {
-//   meals.push( {
-//     id:meals.length, 
-//     name:req.body.plate, 
-//     description:req.body.description,
-//     price:req.body.price,
-//     img_url:req.body.img_url
-//   } )
-//   res.json(meals)
-//   res.status(201).send('Plate added')
-// })
-
-app.post('/meals', (req, res) => {
-  //push
-  meals.update( {
-    id:meals.length, 
-    name:req.body.plate, 
-    description:req.body.description,
-    price:req.body.price,
-    img_url:req.body.img_url
-  } )
+app.post('/meals', async (req, res) => {
+  let {data, error} = await supabase
+  .from('meals')
+  .insert({
+    id:meals.length,
+    name: req.body.plate,
+    description: req.body.description,
+    price: req.body.price,
+    picture: req.body.img_url })
   res.json(meals)
   res.status(201).send('Plate added')
+  console.log(data, error)
 })
