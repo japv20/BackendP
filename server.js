@@ -5,8 +5,8 @@ const port = 3000
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('html'))
 app.use(express.urlencoded({ extended: true }));
-import packages from '@supabase/supabase-js';
 
 import Plate  from './modules.js';
 const Comida = Plate;
@@ -14,14 +14,26 @@ const Comida = Plate;
 console.log(Comida)
 
 //Supabase
+import packages from '@supabase/supabase-js';
 const {createClient} = packages
 
 const supabaseUrl = 'https://nzbdfmiovbsqjwwhilhn.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE'
 const supabase = createClient(supabaseUrl, supabaseKey)
 
+//Linking html file onto server
 app.get('/', (req, res) => {
   res.json({message:"Hello"})
+  // const { user, sesion, error } = await supabase.auth.signIn({
+  //   provider: 'google'
+  // })
+  // res.sendFile('index.html')
+})
+
+// To decrypt user link
+app.get('/callback', async(req,res) => {
+  // console.log(`Token: ${req.params}`)
+  // res.sendStatus(403)
 })
 
 app.listen(port, () => {
@@ -53,11 +65,19 @@ const meals = [
   }
 ]
 
+// app.post('/login', async(req, res) => {
+  // console.log(`Email: ${req.body.email}`)
+  // const { user, session, error } = await supabase.auth.signIn({
+    // email: req.body.email
+  // })
+// })
+
 app.get('/meals', async(req, res) => {
   let {data: meals, error} = await supabase
   .from('meals')
   .select('*')
   res.json(meals)
+  console.log(meals)
 
   meals.forEach((meal) => {
     let detailedMeal = new Plate(meal.name,meal.description,meal.price)
