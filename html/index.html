@@ -41,6 +41,13 @@
         <h2 id="desserts"> Desserts </h2>
         <h2 id="drinks"> Drinks </h2> -->
         <ul id="menus"></ul>
+        <div id="edit-modal">
+            <div class="content-to-edit">
+                <p> Testing </p>
+                <button> Save </button>
+                <button> Cancel </button>
+            </div>
+        </div>
 
         <h1 id="location"> Where to find us </h1>
         <p> Address </p>
@@ -69,7 +76,7 @@
             <button id="submition" type="submit"> Submit </button>
         </form>
         <br>
-        <button id="edit"> Edit </button>
+        <!-- <button id="edit"> Edit </button> -->
     </main>
 
     <footer>
@@ -134,114 +141,60 @@
                     <p> <i> ${item.category} </p> </i>
                     <p> ${item.description} </p>
                     <p> ${item.price} </p>
-                    <img src=${item.picture}/>
+                    <img src=${item.picture}/> <br>
+                    <button id="${item.id}" class="edit"> Edit </button>
+                    <button id="${item.id}" class="delete"> Delete </button>
                     `
                 });
             })
+        })
+
+        // Cleaning form inputs
+        function clearForm() {
+                inputCategories.value = "";
+                inputDish.value = "";
+                inputDescription.value = "";
+                inputPrice.value = "";
+                inputImg.value = "";
+        }
         
         // Inserting data to supabase table
         const mealForm = document.querySelector('#addForm')
+        
         mealForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             console.log("I have been clicked")
-            const formInputs = mealForm.querySelectorAll('input, select')
-            
-            let submission = {}
-            formInputs.forEach(element => {
-                const {value, name} = element
-                if (value) {
-                    submission[name] = value
-                }
-            })
-            console.log(submission)
 
-            await supabase
-            .from('meals')
-            .insert([
-                {submission}
-            ])
+            let mealCategory = document.getElementById('inputCategories').value
+            let mealName = document.getElementById('inputDish').value;
+            let mealDescription = document.getElementById('inputDescription').value;
+            let mealPrice = document.getElementById('inputPrice').value;
+            let mealImage = document.getElementById('inputImg').value;
+        
+            fetch('http://localhost:3000/meals', {
+                    headers: {
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({category:mealCategory, plate:mealName, description:mealDescription, price:mealPrice, img_url:mealImage})
+                })
+            location.reload()
         })
 
-            // const inputForm = document.getElementById('submition');
-
-            // function clearForm() {
-            //     inputCategories.value = "";
-            //     inputDish.value = "";
-            //     inputDescription.value = "";
-            //     inputPrice.value = "";
-            //     inputImg.value = "";
-            // }
-            
-            // inputForm.addEventListener('click', (event) => {
+        // Start editing meals
+            // const editOption = document.getElementById('edit');
+            // console.log(editOption)
+            // editOption.addEventListener('click', (event) => {
             //     event.preventDefault();
-            //     console.log("I have been clicked nya");
-
-            //     let mealCategory = document.getElementById('inputCategories').value
-            //     let mealName = document.getElementById('inputDish').value;
-            //     let mealDescription = document.getElementById('inputDescription').value;
-            //     let mealPrice = document.getElementById('inputPrice').value;
-            //     let mealImage = document.getElementById('inputImg').value;
-
-            //     // console.log(mealCategory, mealName, mealDescription, mealPrice, mealImage);
-            //     const allInputs = mealCategory, mealName, mealDescription, mealPrice, mealImage
-            //     console.log(allInputs);
-            //     clearForm();
-
-            //     let submission = {}
-
-            //     allInputs.forEach(element => {
-            //         const {value, name} = element
-            //         if (value) {
-            //             submission[name] = value
-            //         }
-            //     })
-
-            //     const {error, data} = await supabase.from("meals").insert([submission])
-            //     console.log(error,data)
-
-
-
-                // listHolder.innerHTML += `
-                // <h3> ${mealName} </h3>
-                // <p> <i> ${mealCategory} </i> </p>
-                // <p> ${mealDescription} </p>
-                // <p> ${mealPrice} </p>
-                // <img src="${mealImage}">
-                // `
-
-                // fetch('http://localhost:3000/meals', {
-                //     headers: {
-                //         'Accept':'application/json',
-                //         'Content-Type':'application/json'
-                //     },
-                //     method: 'POST',
-                //     // body: JSON.stringify({title:"This is my title"})
-                //     body: JSON.stringify({category:mealCategory, plate:mealName, description:mealDescription, price:mealPrice, img_url:mealImage})
-                // })
-                
-                // .then(response => response.json())
-                // .then((response) => {
-                //     console.log(response);
-                //     // console.log(`Response is ${response[0].name}`);
-                // })
-            //})
-
-                console.log(data)
-                findID = data.findIndex((obj => obj.id == 1));
-                console.log("Before update: ", data[findID]);
-
-                data[findID].name = "Vegan Hallaca";
-                console.log("After update: ", data[findID]);
-
-                const editOption = document.getElementById('edit');
-                console.log(editOption)
-                editOption.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    console.log("Hello");
-                })      
+            //     console.log("Hello");
+            // })
+            let modal = document.getElementById('edit-modal')
+            let editButtons = document.querySelectorAll('.edit');
+            console.log(editButtons)
+            editButtons.forEach(element => {
+                console.log("Hello")
             })
-
-    
 </script>
 
 </html>
