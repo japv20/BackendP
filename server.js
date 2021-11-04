@@ -27,13 +27,13 @@ app.get('/', (req, res) => {
   // const { user, sesion, error } = await supabase.auth.signIn({
   //   provider: 'google'
   // })
-  // res.sendFile('index.html')
+  res.sendFile('index.html')
 })
 
 // To decrypt user link
 app.get('/callback', async(req,res) => {
-  // console.log(`Token: ${req.params}`)
-  // res.sendStatus(403)
+  console.log(`Token: ${req.params.data}`)
+  res.sendStatus(200)
 })
 
 app.listen(port, () => {
@@ -65,19 +65,19 @@ const meals = [
   }
 ]
 
-// app.post('/login', async(req, res) => {
-  // console.log(`Email: ${req.body.email}`)
-  // const { user, session, error } = await supabase.auth.signIn({
-    // email: req.body.email
-  // })
-// })
+app.post('/login', async(req, res) => {
+  console.log(`Email: ${req.body.email}`)
+  const { user, session, error } = await supabase.auth.signIn({
+    email: req.body.email
+  })
+})
 
 app.get('/meals', async(req, res) => {
   let {data: meals, error} = await supabase
   .from('meals')
   .select('*')
   res.json(meals)
-  console.log(meals)
+  // console.log(meals)
 
   meals.forEach((meal) => {
     let detailedMeal = new Plate(meal.name,meal.description,meal.price)

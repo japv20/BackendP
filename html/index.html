@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/../../BackendProject/FrontendP/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title> Ragnvindr </title>
 </head>
@@ -66,7 +66,7 @@
             <label for="image-food"> Attach Image </label> <br>
             <input type="file" name="picture" id="inputImg"> <br>
             
-            <button id="submition"> Submit </button>
+            <button id="submition" type="submit"> Submit </button>
         </form>
         <br>
         <button id="edit"> Edit </button>
@@ -78,10 +78,25 @@
     
 </body>
 
+<script src="https://unpkg.com/@supabase/supabase-js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"> </script>
 <script>
 
     document.addEventListener("DOMContentLoaded", (event) => {
 
+        //Google signup
+        const googleIcon = document.getElementById('google-icon')
+        googleIcon.addEventListener('click', (event) => {
+            event.preventDefault()
+            console.log("Hello")
+            const { createClient } = supabase
+            supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
+            console.log(supabase);
+
+            supabase.auth.signIn({provider:'google'})
+        })
+
+        // Magic link sign up
         const userToLogIn = document.getElementById('user-login');
         const userForm = document.getElementById('user-form')
         userToLogIn.addEventListener('click', (event) => {
@@ -92,22 +107,6 @@
 
         const emailAddress = document.getElementById('user-email')
         const buttonForm = document.getElementById('get-link')
-
-        const googleIcon = document.getElementById('google-icon')
-
-        googleIcon.addEventListener('click', (event) => {
-            event.preventDefault()
-            console.log("Hello")
-
-            async function signInWithGoogle() {
-            const { user, session, error } = await supabase.auth.signIn({
-                provider: 'google'
-            })
-        }
-
-        signInWithGoogle()
-        })
-
         buttonForm.addEventListener('click', (event) => {
             event.preventDefault();
             console.log("hello")
@@ -123,7 +122,7 @@
             })
         })
 
-
+        // Calling API meals
         fetch('http://localhost:3000/meals')
         .then(response => response.json())
             .then ((data) => {
@@ -138,37 +137,77 @@
                     <img src=${item.picture}/>
                     `
                 });
-
-            const inputForm = document.getElementById('submition');
-
-            function clearForm() {
-                inputCategories.value = "";
-                inputDish.value = "";
-                inputDescription.value = "";
-                inputPrice.value = "";
-                inputImg.value = "";
-            }
+            })
+        
+        // Inserting data to supabase table
+        const mealForm = document.querySelector('#addForm')
+        mealForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            console.log("I have been clicked")
+            const formInputs = mealForm.querySelectorAll('input, select')
             
-            inputForm.addEventListener('click', (event) => {
-                event.preventDefault();
-                console.log("I have been clicked nya");
+            let submission = {}
+            formInputs.forEach(element => {
+                const {value, name} = element
+                if (value) {
+                    submission[name] = value
+                }
+            })
+            console.log(submission)
 
-                let mealCategory = document.getElementById('inputCategories').value
-                let mealName = document.getElementById('inputDish').value;
-                let mealDescription = document.getElementById('inputDescription').value;
-                let mealPrice = document.getElementById('inputPrice').value;
-                let mealImage = document.getElementById('inputImg').value;
+            await supabase
+            .from('meals')
+            .insert([
+                {submission}
+            ])
+        })
 
-                console.log(mealCategory, mealName, mealDescription, mealPrice, mealImage);
-                clearForm();
+            // const inputForm = document.getElementById('submition');
 
-                listHolder.innerHTML += `
-                <h3> ${mealName} </h3>
-                <p> <i> ${mealCategory} </i> </p>
-                <p> ${mealDescription} </p>
-                <p> ${mealPrice} </p>
-                <img src="${mealImage}">
-                `
+            // function clearForm() {
+            //     inputCategories.value = "";
+            //     inputDish.value = "";
+            //     inputDescription.value = "";
+            //     inputPrice.value = "";
+            //     inputImg.value = "";
+            // }
+            
+            // inputForm.addEventListener('click', (event) => {
+            //     event.preventDefault();
+            //     console.log("I have been clicked nya");
+
+            //     let mealCategory = document.getElementById('inputCategories').value
+            //     let mealName = document.getElementById('inputDish').value;
+            //     let mealDescription = document.getElementById('inputDescription').value;
+            //     let mealPrice = document.getElementById('inputPrice').value;
+            //     let mealImage = document.getElementById('inputImg').value;
+
+            //     // console.log(mealCategory, mealName, mealDescription, mealPrice, mealImage);
+            //     const allInputs = mealCategory, mealName, mealDescription, mealPrice, mealImage
+            //     console.log(allInputs);
+            //     clearForm();
+
+            //     let submission = {}
+
+            //     allInputs.forEach(element => {
+            //         const {value, name} = element
+            //         if (value) {
+            //             submission[name] = value
+            //         }
+            //     })
+
+            //     const {error, data} = await supabase.from("meals").insert([submission])
+            //     console.log(error,data)
+
+
+
+                // listHolder.innerHTML += `
+                // <h3> ${mealName} </h3>
+                // <p> <i> ${mealCategory} </i> </p>
+                // <p> ${mealDescription} </p>
+                // <p> ${mealPrice} </p>
+                // <img src="${mealImage}">
+                // `
 
                 // fetch('http://localhost:3000/meals', {
                 //     headers: {
@@ -185,7 +224,7 @@
                 //     console.log(response);
                 //     // console.log(`Response is ${response[0].name}`);
                 // })
-            })
+            //})
 
                 console.log(data)
                 findID = data.findIndex((obj => obj.id == 1));
@@ -201,7 +240,7 @@
                     console.log("Hello");
                 })      
             })
-    })
+
     
 </script>
 
