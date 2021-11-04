@@ -5,7 +5,7 @@ const port = 3000
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('html'))
+app.use(express.static('html')) // this brings the folder html into the server
 app.use(express.urlencoded({ extended: true }));
 
 import Plate  from './modules.js';
@@ -24,17 +24,14 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 //Linking html file onto server
 app.get('/', (req, res) => {
   res.json({message:"Hello"})
-  // const { user, sesion, error } = await supabase.auth.signIn({
-  //   provider: 'google'
-  // })
   res.sendFile('index.html')
 })
 
 // To decrypt user link
-app.get('/callback', async(req,res) => {
-  console.log(`Token: ${req.params.data}`)
-  res.sendStatus(200)
-})
+// app.get('/callback', async(req,res) => {
+//   console.log(`Token: ${req.params.data}`)
+//   res.sendStatus(200)
+// })
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
@@ -65,6 +62,7 @@ const meals = [
   }
 ]
 
+// Login with magic link
 app.post('/login', async(req, res) => {
   console.log(`Email: ${req.body.email}`)
   const { user, session, error } = await supabase.auth.signIn({
@@ -86,15 +84,22 @@ app.get('/meals', async(req, res) => {
 })
 
 app.post('/meals', async (req, res) => {
+  // let mealsInput = req.body.submission;
   let {data, error} = await supabase
   .from('meals')
-  .insert({
-    id:meals.length,
+  .insert([ {
+    category: req.body.category,
     name: req.body.plate,
     description: req.body.description,
     price: req.body.price,
-    picture: req.body.img_url })
-  res.json(meals)
+    picture: req.body.img_url
+  //   mealsInput
+  } ])
+  // res.json(meals)
+  // console.log(
+  //   req.body.category, req.body.plate, req.body.description, req.body.price, req.body.img_url
+  // )
+  // console.log(meals)
   res.status(201).send('Plate added')
   console.log(data, error)
 })
