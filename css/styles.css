@@ -71,6 +71,14 @@ li {
     font-size: var(--li-size);
 }
 
+#eliminate{
+    font-size: 30px;
+}
+
+#eliminate:hover {
+    cursor: pointer;
+}
+
 #addForm {
     padding: 10px 10px 10px 10px;
     width: 80%;

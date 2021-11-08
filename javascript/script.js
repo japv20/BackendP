@@ -46,16 +46,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let listHolder = document.getElementById('menus');
             data.forEach(item => {
                 listHolder.innerHTML += 
-                `<ul class="mealDetails">
-                <li>
+                `<div class="meal">
                 <h3> ${item.name} </h3>
                 <p> <i> ${item.category} </i> </p>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
                 <img src=${item.picture}/> <br>
                 <button id="${item.id}" class="edit"> Edit </button>
-                </li>
-                </ul>`
+                <span id="eliminate">&times;</span> 
+                </div>`
             });
         })
     })
@@ -92,8 +91,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
         location.reload()
     })
 
-    // Start editing meals
-        let modal = document.getElementById('edit-modal')
-
-        
-        
+    // Delete meals
+    console.log("Here we go again");
+    const trial = document.getElementById('user-form')
+    console.log(trial)
+    const trial2 = document.getElementById('menus')
+    console.log(trial2)
+    const trial3 = document.getElementsByClassName('meal')
+    console.log(trial3)
+    const trial33 = [...trial3]
+    console.log(trial33)
+    let newArr = Array.from(trial3)
+    console.log(newArr);
