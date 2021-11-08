@@ -40,7 +40,7 @@
         <h2 id="main"> Main </h2>
         <h2 id="desserts"> Desserts </h2>
         <h2 id="drinks"> Drinks </h2> -->
-        <ul id="menus"></ul>
+        <div id="menus"></div>
         <div id="edit-modal">
             <div class="content-to-edit">
                 <p> Testing </p>
@@ -54,13 +54,13 @@
         <h1> Add your favourite plate! </h1>
         
         <form method="POST" id="addForm">
-            <label for="category"> Category: </label>
+            <label for="category"> Category: </label> <br>
             <select name="categories" id="inputCategories">
                 <option value="Starters"> Starters </option>
                 <option value="Main"> Main </option>
                 <option value="Drinks"> Drinks </option>
                 <option value="Desserts"> Desserts </option>
-            </select>
+            </select> <br>
             <label for="plate"> Plate </label> <br>
             <input type="text" name="name" id="inputDish"> <br>
            
@@ -87,114 +87,6 @@
 
 <script src="https://unpkg.com/@supabase/supabase-js"> </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"> </script>
-<script>
-
-    document.addEventListener("DOMContentLoaded", (event) => {
-
-        //Google signup
-        const googleIcon = document.getElementById('google-icon')
-        googleIcon.addEventListener('click', (event) => {
-            event.preventDefault()
-            console.log("Hello")
-            const { createClient } = supabase
-            supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
-            console.log(supabase);
-
-            supabase.auth.signIn({provider:'google'})
-        })
-
-        // Magic link sign up
-        const userToLogIn = document.getElementById('user-login');
-        const userForm = document.getElementById('user-form')
-        userToLogIn.addEventListener('click', (event) => {
-            event.preventDefault();
-            console.log("Hello")
-            userForm.style.display = "block";
-        })
-
-        const emailAddress = document.getElementById('user-email')
-        const buttonForm = document.getElementById('get-link')
-        buttonForm.addEventListener('click', (event) => {
-            event.preventDefault();
-            console.log("hello")
-            console.log(`This is the email: ${emailAddress.value}`)
-
-            fetch('http://localhost:3000/login', {
-                headers: {
-                        'Accept':'application/json',
-                        'Content-Type':'application/json'
-                    },
-                    method: 'POST',
-                    body: JSON.stringify({email:emailAddress.value}) 
-            })
-        })
-
-        // Calling API meals
-        fetch('http://localhost:3000/meals')
-        .then(response => response.json())
-            .then ((data) => {
-                console.log(data); // array of meals
-                let listHolder = document.getElementById('menus');
-                data.forEach(item => {
-                    listHolder.innerHTML += 
-                    ` <h3> ${item.name} </h3>
-                    <p> <i> ${item.category} </p> </i>
-                    <p> ${item.description} </p>
-                    <p> ${item.price} </p>
-                    <img src=${item.picture}/> <br>
-                    <button id="${item.id}" class="edit"> Edit </button>
-                    <button id="${item.id}" class="delete"> Delete </button>
-                    `
-                });
-            })
-        })
-
-        // Cleaning form inputs
-        function clearForm() {
-                inputCategories.value = "";
-                inputDish.value = "";
-                inputDescription.value = "";
-                inputPrice.value = "";
-                inputImg.value = "";
-        }
-        
-        // Inserting data to supabase table
-        const mealForm = document.querySelector('#addForm')
-        
-        mealForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            console.log("I have been clicked")
-
-            let mealCategory = document.getElementById('inputCategories').value
-            let mealName = document.getElementById('inputDish').value;
-            let mealDescription = document.getElementById('inputDescription').value;
-            let mealPrice = document.getElementById('inputPrice').value;
-            let mealImage = document.getElementById('inputImg').value;
-        
-            fetch('http://localhost:3000/meals', {
-                    headers: {
-                        'Accept':'application/json',
-                        'Content-Type':'application/json'
-                    },
-                    method: 'POST',
-                    body: JSON.stringify({category:mealCategory, plate:mealName, description:mealDescription, price:mealPrice, img_url:mealImage})
-                })
-            location.reload()
-        })
-
-        // Start editing meals
-            // const editOption = document.getElementById('edit');
-            // console.log(editOption)
-            // editOption.addEventListener('click', (event) => {
-            //     event.preventDefault();
-            //     console.log("Hello");
-            // })
-            let modal = document.getElementById('edit-modal')
-            let editButtons = document.querySelectorAll('.edit');
-            console.log(editButtons)
-            editButtons.forEach(element => {
-                console.log("Hello")
-            })
-</script>
+<script src="http://localhost:3000/script.js"> </script>
 
 </html>
