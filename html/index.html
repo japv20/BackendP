@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="http://localhost:3000/styles.css">
+    <link rel="stylesheet" href="http://localhost:3000/shopping-cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title> Ragnvindr </title>
 </head>
@@ -18,7 +19,7 @@
             <a href="#location"> Location </a>
             <i class="fa fa-google" id="google-icon"></i>
             <i class="fa fa-user circle" id="user-login"></i>
-            <i class="fa fa-shopping-cart"></i>
+            <i class="fa fa-shopping-cart" id="open-cart"></i>
         </nav>
 
         <img id="pic" src="back-pic.jpg">
@@ -27,7 +28,6 @@
     </header>
 
     <main>
-
         <h1 id="menu"> Menu </h1>
         <div id="user-form">
             <form>
@@ -36,6 +36,9 @@
                 <button id="get-link"> Send me a magic link </button>
             </form>
         </div>
+
+        <div class="cart-container"> </div>
+
         <!-- <h2 id="starters"> Starters </h2>
         <h2 id="main"> Main </h2>
         <h2 id="desserts"> Desserts </h2>
@@ -88,5 +91,6 @@
 <script src="https://unpkg.com/@supabase/supabase-js"> </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"> </script>
 <script src="http://localhost:3000/script.js"> </script>
+<script src="http://localhost:3000/shopping-cart.js"></script>
 
 </html>
