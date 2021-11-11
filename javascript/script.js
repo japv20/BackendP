@@ -101,5 +101,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
     console.log(trial3)
     const trial33 = [...trial3]
     console.log(trial33)
-    let newArr = Array.from(trial3)
-    console.log(newArr);
+    let newArr = [].slice.call(trial3)
+    console.log(newArr); 
