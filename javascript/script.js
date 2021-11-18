@@ -10,8 +10,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log(supabase);
 
         supabase.auth.signIn({provider:'google'})
-    })
 
+        let metadata_req = {
+            method: "GET",
+            url: "http://localhost:3000/protected/all/metadata"
+            
+        }
+
+    })
     // Magic link sign up
     const userToLogIn = document.getElementById('user-login');
     const userForm = document.getElementById('user-form')
@@ -46,15 +52,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let listHolder = document.getElementById('menus');
             data.forEach(item => {
                 listHolder.innerHTML += 
-                `<div class="meal">
+                `<section class="meal">
                 <h3> ${item.name} </h3>
                 <p> <i> ${item.category} </i> </p>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
                 <img src=${item.picture}/> <br>
                 <button id="${item.id}" class="edit"> Edit </button>
-                <span id="eliminate">&times;</span> 
-                </div>`
+                <button id="${item.id}" class="delete"> Delete </span> 
+                </section>`
             });
         })
     })
@@ -92,14 +98,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     })
 
     // Delete meals
-    console.log("Here we go again");
-    const trial = document.getElementById('user-form')
-    console.log(trial)
-    const trial2 = document.getElementById('menus')
-    console.log(trial2)
-    const trial3 = document.getElementsByClassName('meal')
-    console.log(trial3)
-    const trial33 = [...trial3]
-    console.log(trial33)
-    let newArr = [].slice.call(trial3)
-    console.log(newArr); 
+    console.log('start')
+    let deleteButton = document.getElementById('1')
+    console.log(deleteButton);
+
+  
