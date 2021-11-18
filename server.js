@@ -38,6 +38,8 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
   // console.log(projects)
+  console.log(supabase.auth.session());
+  // supabase.auth.from('meals').select('*').then(console.log)
 })
 
 const meals = [
@@ -63,6 +65,9 @@ const meals = [
     "img_url": "https://via.placeholder.com/150"
   }
 ]
+
+// Login with google
+
 
 // Login with magic link
 app.post('/login', async(req, res) => {

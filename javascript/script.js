@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-
+    
     //Google signup
     const googleIcon = document.getElementById('google-icon')
     googleIcon.addEventListener('click', (event) => {
@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             url: "http://localhost:3000/protected/all/metadata"
             
         }
-
     })
+
     // Magic link sign up
     const userToLogIn = document.getElementById('user-login');
     const userForm = document.getElementById('user-form')
@@ -52,18 +52,42 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let listHolder = document.getElementById('menus');
             data.forEach(item => {
                 listHolder.innerHTML += 
-                `<section class="meal">
+                `<section class="meal" id="${item.id}">
                 <h3> ${item.name} </h3>
                 <p> <i> ${item.category} </i> </p>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
                 <img src=${item.picture}/> <br>
-                <button id="${item.id}" class="edit"> Edit </button>
-                <button id="${item.id}" class="delete"> Delete </span> 
+                <button class="edit"> Edit </button>
+                <button class="delete"> Delete </button> 
                 </section>`
             });
+
+            // Get edit buttons
+            let editButtonsC = document.getElementsByClassName('edit'); //console.log(editButtonsC)
+            let editButtons = [... editButtonsC]
+            console.log(editButtons)
+
+            editButtons.forEach(editAction => {
+                // console.log("Hi")
+                editAction.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    console.log('you clicked me')
+                    console.log(`You have clicked this button ${editAction.id}`)
+                })
+            })
+
+             // Get delete buttons
+            let deleteButtonsC = document.getElementsByClassName('delete'); // console.log(deleteButtonsC)
+            const deleteButtons = [... deleteButtonsC]
+            console.log(deleteButtons)
         })
-    })
+    }) //closing dom content loaded
+
+    // Delete data on supabase
+    function deleteData() {
+        
+    }
 
     // Cleaning form inputs
     function clearForm() {
@@ -96,10 +120,3 @@ document.addEventListener("DOMContentLoaded", (event) => {
             })
         location.reload()
     })
-
-    // Delete meals
-    console.log('start')
-    let deleteButton = document.getElementById('1')
-    console.log(deleteButton);
-
-  
