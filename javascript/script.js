@@ -1,22 +1,40 @@
+// import { SupabaseClient } from "@supabase/supabase-js"
+
 document.addEventListener("DOMContentLoaded", (event) => {
     
     //Google signup
     const googleIcon = document.getElementById('google-icon')
-    googleIcon.addEventListener('click', (event) => {
+    async function signInGoogle() {
+        const { user, session, error } = await supabase.auth.signIn({
+            provider: 'google' 
+        }, {
+            // redirectTo: 'http://localhost:3000/welcome'
+        })
+    }
+
+    // const { createClient } = supabase;
+        // supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
+        // console.log(supabase);
+    // const user = supabase.auth.user()
+    // console.log(user)
+    
+    googleIcon.addEventListener('click', async(event) => {
         event.preventDefault()
-        console.log("Hello")
         const { createClient } = supabase
         supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
-        console.log(supabase);
+        // console.log(supabase);
 
-        supabase.auth.signIn({provider:'google'})
+        // const { user, session, error } = await supabase.auth.signIn({
+        //     provider: 'google' 
+        // })
 
-        let metadata_req = {
-            method: "GET",
-            url: "http://localhost:3000/protected/all/metadata"
-            
-        }
+        supabase.auth.signIn({ provider:'google'}
+        )
+
+        // signInGoogle();
     })
+
+    console.log(supabase.auth.currentUser())
 
     // Magic link sign up
     const userToLogIn = document.getElementById('user-login');
@@ -49,6 +67,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .then(response => response.json())
         .then ((data) => {
             console.log(data); // array of meals
+        
             let listHolder = document.getElementById('menus');
             data.forEach(item => {
                 listHolder.innerHTML += 
@@ -57,47 +76,55 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <p> <i> ${item.category} </i> </p>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
-                <img src=${item.picture}/> <br>
+                <img class="picture-container" src=${item.picture}/> <br>
                 <button class="edit"> Edit </button>
                 <button class="delete"> Delete </button> 
-                </section>`
-            });
+                </section>
+                `
 
-            // Get edit buttons
-            let editButtonsC = document.getElementsByClassName('edit'); //console.log(editButtonsC)
-            let editButtons = [... editButtonsC]
-            console.log(editButtons)
+            }); //closing data for each loop
 
-            editButtons.forEach(editAction => {
-                // console.log("Hi")
-                editAction.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    console.log('you clicked me')
-                    console.log(`You have clicked this button ${editAction.id}`)
-                })
-            })
+            
+            let TODO = document.querySelectorAll('.meal');
+            console.log(TODO)
+            let TODONODE = [...TODO]
+            console.log(TODONODE)
+
+            function getDataHTML (id) {
+                let nameContainer = document.getElementsByClassName('name-container')
+                let categoryContainer = document.getElementsByClassName('category-container')
+                let descriptionContainer = document.getElementsByClassName('description-container')
+                let priceContainer = document.getElementsByClassName('price-container')
+                let pictureContainer = document.getElementsByClassName('picture-container')
+            }
 
              // Get delete buttons
             let deleteButtonsC = document.getElementsByClassName('delete'); // console.log(deleteButtonsC)
             const deleteButtons = [... deleteButtonsC]
-            console.log(deleteButtons)
+            // console.log(deleteButtons)
+            deleteButtons.forEach(deleteAction => {
+            deleteAction.addEventListener('click', (event) => {
+                event.preventDefault();
+                //FIRSTELEMENTCHILD to get details
+                console.log(`you clicked me to delete ${deleteAction.parentNode.outerText} information`)
+                
+                fetch('http://localhost:3000/delete', {
+                headers: {
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                method: 'DELETE',
+                body: JSON.stringify({id:deleteAction.parentNode.id, body: deleteAction.parentNode.outerText}) 
+                
+                })
+                // location.reload()
+            })
         })
+        })
+
+
     }) //closing dom content loaded
 
-    // Delete data on supabase
-    function deleteData() {
-        
-    }
-
-    // Cleaning form inputs
-    function clearForm() {
-            inputCategories.value = "";
-            inputDish.value = "";
-            inputDescription.value = "";
-            inputPrice.value = "";
-            inputImg.value = "";
-    }
-    
     // Inserting data to supabase table
     const mealForm = document.querySelector('#addForm')
     mealForm.addEventListener('submit', async (event) => {

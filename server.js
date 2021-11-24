@@ -108,5 +108,13 @@ app.post('/meals', async (req, res) => {
   // )
   // console.log(meals)
   res.status(201).send('Plate added')
-  console.log(data, error)
+  // console.log(data, error)
+})
+
+app.delete('/delete', async (req,res) => {
+  let {data, error} = await supabase
+  .from('meals')
+  .delete()
+  .match({'id': req.body.id})
+  console.log({data,error})
 })
