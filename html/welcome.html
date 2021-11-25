@@ -9,4 +9,15 @@
 <body>
     <h1> HOLA MUNDO </h1>
 </body>
+
+<script src="https://unpkg.com/@supabase/supabase-js"> </script>
+<script>
+    const { createClient } = supabase;
+        supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
+        // console.log(supabase);
+
+        console.log(supabase.auth.user())
+
+</script>
+
 </html>
