@@ -100,7 +100,8 @@ app.post('/meals', async (req, res) => {
     name: req.body.plate,
     description: req.body.description,
     price: req.body.price,
-    picture: req.body.img_url
+    picture: req.body.img_url,
+    user_id: req.body.user
   //   mealsInput
   } ])
   // res.json(meals)

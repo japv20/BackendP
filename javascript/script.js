@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     'Content-Type':'application/json'
                 },
                 method: 'DELETE',
-                body: JSON.stringify({id:deleteAction.parentNode.id, body: deleteAction.parentNode.outerText}) 
+                body: JSON.stringify({id:deleteAction.parentNode.id}) 
                 
                 })
                 // location.reload()
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     'Content-Type':'application/json'
                 },
                 method: 'POST',
-                body: JSON.stringify({category:mealCategory, plate:mealName, description:mealDescription, price:mealPrice, img_url:mealImage})
+                body: JSON.stringify({category:mealCategory, plate:mealName, description:mealDescription, price:mealPrice, img_url:mealImage, user:supabase.auth.user().id})
             })
         location.reload()
     })
