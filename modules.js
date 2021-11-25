@@ -5,4 +5,3 @@ export default class Plate {
         this.mealPrice = mealPrice;
     }
 }
-
