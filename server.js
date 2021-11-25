@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
   // console.log(projects)
-  console.log(supabase.auth.session());
+  // console.log(supabase.auth.session());
   // supabase.auth.from('meals').select('*').then(console.log)
 })
 
@@ -81,6 +81,7 @@ app.get('/meals', async(req, res) => {
   let {data: meals, error} = await supabase
   .from('meals')
   .select('*')
+  // console.log(supabase.auth.session())
   res.json(meals)
   // console.log(meals)
 
@@ -118,3 +119,4 @@ app.delete('/delete', async (req,res) => {
   .match({'id': req.body.id})
   console.log({data,error})
 })
+

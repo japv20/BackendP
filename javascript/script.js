@@ -6,35 +6,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const googleIcon = document.getElementById('google-icon')
     async function signInGoogle() {
         const { user, session, error } = await supabase.auth.signIn({
-            provider: 'google' 
-        }, {
-            // redirectTo: 'http://localhost:3000/welcome'
-        })
+            provider: 'google', 
+        }
+        // {
+        // redirectTo:'http://localhost:5500/html/welcome.html'
+        // }
+        )
     }
 
-    // const { createClient } = supabase;
-        // supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
+    const { createClient } = supabase;
+        supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
         // console.log(supabase);
-    // const user = supabase.auth.user()
-    // console.log(user)
     
     googleIcon.addEventListener('click', async(event) => {
         event.preventDefault()
-        const { createClient } = supabase
-        supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
-        // console.log(supabase);
-
-        // const { user, session, error } = await supabase.auth.signIn({
-        //     provider: 'google' 
-        // })
-
-        supabase.auth.signIn({ provider:'google'}
-        )
-
-        // signInGoogle();
+        signInGoogle()
     })
 
-    console.log(supabase.auth.currentUser())
+    console.log(supabase.auth.user())
 
     // Magic link sign up
     const userToLogIn = document.getElementById('user-login');
@@ -67,36 +56,53 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .then(response => response.json())
         .then ((data) => {
             console.log(data); // array of meals
-        
+            // endpoint that passes the id
+            // group them by category 
+            
+            //console.log(supabase.auth.user().role) // console.log role of current user
+            
             let listHolder = document.getElementById('menus');
+            // two templates put them in a js folder 
             data.forEach(item => {
-                listHolder.innerHTML += 
-                `<section class="meal" id="${item.id}">
+                let templateForAnon = `
+                <section class="meal" id="${item.id}">
+                <h3> ${item.name} </h3>
+                <p> <i> ${item.category} </i> </p>
+                <p> ${item.description} </p>
+                <p> ${item.price} </p>
+                <img class="picture-container" src=${item.picture}/> <br>
+                </section> `
+
+                let templateForUser = `<section class="meal" id="${item.id}">
                 <h3> ${item.name} </h3>
                 <p> <i> ${item.category} </i> </p>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
                 <img class="picture-container" src=${item.picture}/> <br>
                 <button class="edit"> Edit </button>
-                <button class="delete"> Delete </button> 
-                </section>
-                `
+                <button class="delete"> Delete </button>
+                </section> `
+
+                if (supabase.auth.user().role = 'authenticated') {
+                    listHolder.innerHTML += templateForUser;
+                } else {
+                    listHolder.innerHTML += templateForAnon;
+                }
 
             }); //closing data for each loop
 
-            
+            const logoutButton = document.getElementById('logout')
+            console.log(logoutButton)
+            logoutButton.addEventListener('click', async (event) => {
+                event.preventDefault();
+                const { error } = await supabase.auth.signOut()
+                console.log("bye")
+            })
+                
             let TODO = document.querySelectorAll('.meal');
             console.log(TODO)
             let TODONODE = [...TODO]
             console.log(TODONODE)
-
-            function getDataHTML (id) {
-                let nameContainer = document.getElementsByClassName('name-container')
-                let categoryContainer = document.getElementsByClassName('category-container')
-                let descriptionContainer = document.getElementsByClassName('description-container')
-                let priceContainer = document.getElementsByClassName('price-container')
-                let pictureContainer = document.getElementsByClassName('picture-container')
-            }
 
              // Get delete buttons
             let deleteButtonsC = document.getElementsByClassName('delete'); // console.log(deleteButtonsC)
@@ -106,9 +112,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
             deleteAction.addEventListener('click', (event) => {
                 event.preventDefault();
                 //FIRSTELEMENTCHILD to get details
-                console.log(`you clicked me to delete ${deleteAction.parentNode.outerText} information`)
-                
-                fetch('http://localhost:3000/delete', {
+                console.log(`you clicked me to delete ${deleteAction.parentNode.id} information`)
+                // deleteAction.parentNode.outerText
+                fetch('http://localhost:3000/delete/', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
