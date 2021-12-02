@@ -27,7 +27,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 //Linking html file onto server
 app.get('/', (req, res) => {
   // res.json({message:"Hello"})
-  res.sendFile('/html/index.html')
+  res.sendFile('./public/html/index.html')
 })
 
 // To decrypt user link
