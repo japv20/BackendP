@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     })
 
     // Calling API meals
-    fetch('http://localhost:3000//meals')
+    fetch('http://188.166.172.132//meals')
     .then(response => response.json())
         .then ((data) => {
             console.log(data); // array of meals
