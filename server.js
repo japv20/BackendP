@@ -3,6 +3,10 @@ import cors from 'cors'
 const app = express()
 const port = 3000
 
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 app.use(cors());
 app.use(express.json());
 //app.use(express.static('html')) // this brings the folder html into the server
@@ -27,7 +31,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 //Linking html file onto server
 app.get('/', (req, res) => {
   // res.json({message:"Hello"})
-  res.sendFile('../public/html/index.html')
+  res.sendFile(`${__dirname}/html/index.html`)
 })
 
 // To decrypt user link
