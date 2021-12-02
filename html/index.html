@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost:3000/styles.css">
-    <link rel="stylesheet" href="http://localhost:3000/shopping-cart.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title> Ragnvindr </title>
 </head>
@@ -37,18 +36,17 @@
             </form>
         </div>
 
-        <div class="cart-container"> </div>
-
         <button id="logout"> Log out </button>
-        <div id="menus"></div>
 
-        <div id="edit-modal">
-            <div class="content-to-edit">
-                <p> Testing </p>
-                <button> Save </button>
-                <button> Cancel </button>
+        <div id="updateModal" class="modal">
+            <div class="update-content">
+                <!-- <span class="close">&times;</span> -->
+                <!-- <p> Hello text </p> -->
             </div>
         </div>
+        <div id="menus">
+        </div>
+
 
         <h1 id="location"> Where to find us </h1>
         <p> Address </p>
@@ -76,8 +74,6 @@
             
             <button id="submition" type="submit"> Submit </button>
         </form>
-        <br>
-        <!-- <button id="edit"> Edit </button> -->
     </main>
 
     <footer>
@@ -89,6 +85,5 @@
 <script src="https://unpkg.com/@supabase/supabase-js"> </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"> </script>
 <script src="http://localhost:3000/script.js"> </script>
-<script src="http://localhost:3000/shopping-cart.js"></script>
 
 </html>
