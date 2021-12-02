@@ -6,7 +6,7 @@ const port = 3000
 app.use(cors());
 app.use(express.json());
 app.use(express.static('html')) // this brings the folder html into the server
-app.use(express.static('css')) // this brings the folder css into the server
+app.use(express.static(css + '/public')) // this brings the folder css into the server
 app.use(express.static('javascript')) // this brings the folder js to the server
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,7 +25,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 //Linking html file onto server
 app.get('/', (req, res) => {
-  res.json({message:"Hello"})
+  // res.json({message:"Hello"})
   res.sendFile('index.html')
 })
 

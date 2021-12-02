@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <p> <i> ${item.category} </i> </p>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
-                <img class="picture-container" src=${item.picture}/> <br>
+                <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
                 </section> `
 
                 let templateForUser = `<section class="meal" id="${item.id}">
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <p> <i> ${item.category} </i> </p>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
-                <img class="picture-container" src=${item.picture}/> <br>
+                <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
                 <button class="edit"> Edit </button>
                 <button class="delete"> Delete </button>
                 </section> `
@@ -98,11 +98,50 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 const { error } = await supabase.auth.signOut()
                 console.log("bye")
             })
-                
+            
+            //getting the sections
             let TODO = document.querySelectorAll('.meal');
             console.log(TODO)
             let TODONODE = [...TODO]
             console.log(TODONODE)
+
+            // Get EDIT buttons
+            let editButtonsC = document.getElementsByClassName('edit') // console.log(editButtonsC)
+            let editButtons = [... editButtonsC]; // console.log(editButtons)
+
+            // Get modal
+            let modalUpdate = document.getElementById('updateModal');
+            let closeModal = document.getElementsByClassName('close')[0]
+
+            function displayFormModal(byMealID) {
+                const formContainer = document.querySelector('.update-content');
+                formContainer.innerHTML = `
+                <span class="close">&times;</span>
+                <p> This is the id ${byMealID} </p>
+                
+                `
+            }
+
+            editButtons.forEach(editAction => {
+                editAction.addEventListener('click', (event) => {
+                    event.preventDefault()
+                    console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
+                    console.log(editAction.parentNode.outerText)
+                    modalUpdate.style.display = "block"
+                    
+                    displayFormModal(editAction.parentNode.id)
+
+                    window.onclick = function(event) {
+                        if (event.target == modalUpdate) {
+                            modalUpdate.style.display = "none";
+                    } }
+                    
+                    closeModal.addEventListener('click', e => {
+                        e.preventDefault()
+                        modalUpdate.style.display = "none"
+                    })
+                })
+            })
 
              // Get delete buttons
             let deleteButtonsC = document.getElementsByClassName('delete'); // console.log(deleteButtonsC)
@@ -123,11 +162,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 body: JSON.stringify({id:deleteAction.parentNode.id}) 
                 
                 })
-                // location.reload()
+                location.reload()
             })
         })
         })
-
 
     }) //closing dom content loaded
 
