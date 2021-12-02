@@ -5,9 +5,9 @@ const port = 3000
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('html')) // this brings the folder html into the server
+//app.use(express.static('html')) // this brings the folder html into the server
 //app.use(express.static('/public/css')) // this brings the folder css into the server
-app.use(express.static('javascript')) // this brings the folder js to the server
+//app.use(express.static('javascript')) // this brings the folder js to the server
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
