@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     event.preventDefault()
                     console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
-                    console.log(editAction.firstElementChild)
+                    console.log(editAction.parentNode.firstElementChild)
                     modalUpdate.style.display = "block"
                     
                     displayFormModal(editAction.parentNode.id)
