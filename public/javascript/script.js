@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             //console.log(supabase.auth.user().role) // console.log role of current user
             
             let listHolder = document.getElementById('menus');
+            let roleListHolder = document.getElementById('menus-for-anon');
             data.forEach(item => {
                 listHolder.innerHTML += 
                 ` 
@@ -78,6 +79,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                 if(supabase.auth.user().role == 'authenticated') {
                     console.log("hello")
+                    roleListHolder.innerHTML += `
+                    <section class="meal" id="${item.id}">
+                    <h3> ${item.name} </h3>
+                    <p> <i> ${item.category} </p> </i>
+                    <p> ${item.description} </p>
+                    <p> ${item.price} </p>
+                    <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
+                    <button class="edit"> Edit </button>
+                    <button class="delete"> Delete </button>
+                    </section>
+                    `
                 }
             }); // closing foreach loop
             // let anonHolder = document.getElementById('menus-for-anon')
