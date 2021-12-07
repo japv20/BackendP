@@ -160,7 +160,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     event.preventDefault()
                     console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
-                    console.log(editAction.parentNode.firstElementChild)
+                    // console.log(editAction.parentNode.firstElementChild)
+                    console.log(editAction.parentNode.h3)
                     console.log(editAction.parentNode)
                     
                     let all = editAction.children;
