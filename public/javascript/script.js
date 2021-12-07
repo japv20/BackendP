@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
                     console.log(editAction.parentNode.firstElementChild)
-                    console.log(editAction.parentElement)
+                    console.log(editAction.parentNode)
                     
                     let all = editAction.children;
                     console.log(all)
