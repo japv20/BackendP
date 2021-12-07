@@ -75,6 +75,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 `
 
                 console.log(supabase.auth.user())
+
+                if(supabase.auth.user().role == 'authenticated') {
+                    console.log("hello")
+                }
             }); // closing foreach loop
             // let anonHolder = document.getElementById('menus-for-anon')
             // two templates put them in a js folder 
