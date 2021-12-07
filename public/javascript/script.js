@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             //console.log(supabase.auth.user().role) // console.log role of current user
             
             let listHolder = document.getElementById('menus');
+            let anonHolder = document.getElementById('menus-for-anon')
             // two templates put them in a js folder 
             data.forEach(item => {
                 let templateForAnon = `
@@ -83,11 +84,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <button class="delete"> Delete </button>
                 </section> `
 
+                anonHolder.innerHTML += templateForAnon
+
                 if (supabase.auth.user().role = 'authenticated') {
                     listHolder.innerHTML += templateForUser;
-                } else {
-                    listHolder.innerHTML += templateForAnon;
-                }
+                    anonHolder.style.display = "none";
+                } 
+                // else {
+                //     listHolder.innerHTML += templateForAnon;
+                // }
 
             }); //closing data for each loop
 
