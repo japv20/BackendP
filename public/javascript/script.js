@@ -64,8 +64,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let listHolder = document.getElementById('menus');
             let roleListHolder = document.getElementById('menus-for-anon');
             data.forEach(item => {
-                listHolder.innerHTML += 
-                ` 
+                listHolder.innerHTML += ` 
                 <section class="meal" id="${item.id}">
                 <h3> ${item.name} </h3>
                 <p> <i> ${item.category} </p> </i>
@@ -74,9 +73,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
                 </section>
                 `
-
-                console.log(supabase.auth.user())
-
                 if(supabase.auth.user().role == 'authenticated') {
                     listHolder.style.display = "none";
                     console.log("hello")
@@ -93,6 +89,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     `
                 }
             }); // closing foreach loop
+
             // let anonHolder = document.getElementById('menus-for-anon')
             // two templates put them in a js folder 
             // data.forEach(item => {                
@@ -165,6 +162,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(editAction.parentNode.outerText)
                     console.log(editAction.parentNode.firstElementChild)
                     console.log(editAction.parentElement)
+                    console.log(editAction.contents())
+
                     modalUpdate.style.display = "block"
                     
                     // displayFormModal(editAction.parentNode.id)
