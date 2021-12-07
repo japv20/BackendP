@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         let mealPrice = document.getElementById('inputPrice').value;
         let mealImage = document.getElementById('inputImg').value;
     
-        fetch('http://localhost:3000/meals', {
+        fetch('http://188.166.172.132/meals', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
