@@ -177,8 +177,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     console.log(editAction)
                     console.log(editAction.parentNode)
+                    console.log(editAction.parentNode.h3)
                     console.log(editAction.firstChild)
-                    console.log(editAction.firstElementChild)
+                    console.log(editAction.firstElementChild.value)
 
 
                     window.onclick = function(event) {
