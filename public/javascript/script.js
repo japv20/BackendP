@@ -160,51 +160,29 @@ document.addEventListener("DOMContentLoaded", (event) => {
             editButtons.forEach(editAction => {
                 editAction.addEventListener('click', (event) => {
                     event.preventDefault()
-                    // console.log(editAction.firstElementChild)
-                    // console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
-                    // console.log(editAction.parentNode.outerText)
-                    // // console.log(editAction.parentNode.firstElementChild)
-                    // console.log(editAction.parentNode.h3)
-                    // console.log(editAction.parentNode)
+                    console.log(editAction.firstElementChild)
+                    console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
+                    console.log(editAction.parentNode.outerText)
+                    // console.log(editAction.parentNode.firstElementChild)
+                    console.log(editAction.parentNode.h3)
+                    console.log(editAction.parentNode)
 
-                    fetch('http://188.166.172.132/meals')
-                    .then(response => response.json())
-                    .then ((data) => {
-                        data.forEach((comida) => {
-                            console.log(comida)
-                            const formContainer = document.querySelector('.update-content');
-                            formContainer.innerHTML = `
-                            <h3> Edit </h3>
-                            <form method="PUT" id="update-form">
-                            <label for="newCategory"> Category: </label>
-                            <input type="text" id="newCategory" name="newCategory" value="${comida.category}">
-                            <label for="newName"> Name: </label>
-                            <input type="text" id="newName" name="newName" value="${comida.name}">
-                            <label for="newPrice"> Price: </label>
-                            <input type="text" id="newPrice" name="newPrice" value="${comida.price}">
-                            <label for="newImage"> Picture: </label>
-                            <input type="file" id="newImage" name="newImage" value="${comida.image}">
-                            </form>
-                            `
-                        })
-
+                    
                     modalUpdate.style.display = "block"
                     
                     // displayFormModal(editAction.parentNode.id)
-                    // const formContainer = document.querySelector('.update-content');
-                    // formContainer.innerHTML = `
-                    // <p> This is the id ${editAction.parentNode.id} </p>
-                    // <p> This is the name ${editAction.parentNode.firstElementChild.value} </p>
-                    // <p> This is the category ${editAction.parentNode.secondElementChild} </p>
-                    // `
+                    const formContainer = document.querySelector('.update-content');
+                    formContainer.innerHTML = `
+                    <p> This is the id ${editAction.parentNode.id} </p>
+                    <p> This is the name ${editAction.parentNode.firstElementChild.value} </p>
+                    <p> This is the category ${editAction.parentNode.secondElementChild} </p>
+                    `
 
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
                             modalUpdate.style.display = "none";
                         } 
                     }
-
-                })
 
                 })
             })
