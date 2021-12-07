@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 </section>
                 `
                 if(supabase.auth.user().role == 'authenticated') {
-                    listHolder.style.display = "none";
+                    // listHolder.style.display = "none";
                     console.log("hello")
                     roleListHolder.innerHTML += `
                     <section class="meal" id="${item.id}">
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     fetch('http://188.166.172.132/meals')
                     .then(response => response.json())
                     .then ((data) => {
-                        console.log(data);
+                        // console.log(data);
                         const formContainer = document.querySelector('.update-content');
                         formContainer.innerHTML = `
                         <p> This is the id ${data.id} </p>
