@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 formContainer.innerHTML = `
                 <span class="close">&times;</span>
                 <p> This is the id ${byMealID} </p>
-                <p> This is the tester ${byMealID.name} </p>
+                <p> This is the tester ${byMealID.parentNode.firstElementChild} </p>
                 
                 `
             }
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
                     console.log(editAction.parentNode.firstElementChild)
-                    console.log(editAction.parentElement)
+                    // console.log(editAction.parentElement)
                     modalUpdate.style.display = "block"
                     
                     displayFormModal(editAction.parentNode.id)
