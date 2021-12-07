@@ -64,11 +64,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let listHolder = document.getElementById('menus');
             data.forEach(item => {
                 listHolder.innerHTML += 
-                ` <h3> ${item.name} </h3>
+                ` 
+                <section class="meal" id="${item.id}">
+                <h3> ${item.name} </h3>
                 <p> <i> ${item.category} </p> </i>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
-                <img src=${item.picture}/>
+                <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
+                </section>
                 `
             }); // closing foreach loop
             // let anonHolder = document.getElementById('menus-for-anon')
