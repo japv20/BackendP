@@ -174,9 +174,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             console.log(comida)
                             const formContainer = document.querySelector('.update-content');
                             formContainer.innerHTML = `
-                            <p> This is the id ${comida.id} </p>
-                            <p> This is the name ${comida.name} </p>
-                            <p> This is the category ${comida.category} </p>
+                            <h3> Edit </h3>
+                            <form method="PUT" id="update-form">
+                            <label for="newCategory"> Category: </label>
+                            <input type="text" id="newCategory" name="newCategory" value="${comida.category}">
+                            <label for="newName"> Name: </label>
+                            <input type="text" id="newName" name="newName" value="${comida.name}">
+                            <label for="newPrice"> Price: </label>
+                            <input type="text" id="newPrice" name="newPrice" value="${comida.price}">
+                            <label for="newImage"> Picture: </label>
+                            <input type="file" id="newImage" name="newImage" value="${comida.image}">
+                            </form>
                             `
                         })
 
