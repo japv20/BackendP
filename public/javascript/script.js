@@ -164,6 +164,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(editAction.parentElement)
                     
                     let all = editAction.children;
+                    console.log(all)
                     let todoall = [... all]
                     console.log(todoall.value)
 
