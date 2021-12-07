@@ -164,32 +164,29 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     // console.log(editAction.parentNode.firstElementChild)
                     console.log(editAction.parentNode.h3)
                     console.log(editAction.parentNode)
-                    
-                    let all = editAction.children;
-                    console.log(all)
-                    let todoall = [... all]
-                    console.log(todoall.value)
 
                     modalUpdate.style.display = "block"
                     
                     // displayFormModal(editAction.parentNode.id)
                     const formContainer = document.querySelector('.update-content');
-                formContainer.innerHTML = `
-                <p> This is the id ${editAction.parentNode.id} </p>
-                <p> This is the name ${editAction.parentNode.firstElementChild.value} </p>
-                <p> This is the category ${editAction.parentNode.secondElementChild} </p>
-            
-                `
+                    formContainer.innerHTML = `
+                    <p> This is the id ${editAction.parentNode.id} </p>
+                    <p> This is the name ${editAction.parentNode.firstElementChild.value} </p>
+                    <p> This is the category ${editAction.parentNode.secondElementChild} </p>
+                    `
+
+                    console.log(editAction)
+                    console.log(editAction.parentNode)
+                    console.log(editAction.firstChild)
+                    console.log(editAction.firstElementChild)
+
 
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
                             modalUpdate.style.display = "none";
-                    } }
-                    
-                    // closeModal.addEventListener('click', e => {
-                    //     e.preventDefault()
-                    //     modalUpdate.style.display = "none"
-                    // })
+                        } 
+                    }
+
                 })
             })
 
