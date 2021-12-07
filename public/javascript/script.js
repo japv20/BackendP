@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 formContainer.innerHTML = `
                 <span class="close">&times;</span>
                 <p> This is the id ${byMealID} </p>
-                <p> This is the tester ${byMealID.parentNode.firstElementChild} </p>
+                <p> This is the tester ${editAction.parentNode.firstElementChild} </p>
                 
                 `
             }
