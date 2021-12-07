@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 formContainer.innerHTML = `
                 <span class="close">&times;</span>
                 <p> This is the id ${byMealID} </p>
-                <p> This is the name tester ${byMealID.name} </p>
+                <p> This is the tester ${byMealID.name} </p>
                 
                 `
             }
@@ -130,7 +130,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(editAction.parentNode.outerText)
                     modalUpdate.style.display = "block"
                     
-                    displayFormModal(editAction.parentNode.id)
+                    getMealID = editAction.parentNode.id
+                    displayFormModal(getMealID)
 
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
