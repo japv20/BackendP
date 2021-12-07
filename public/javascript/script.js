@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     event.preventDefault()
                     console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
-                    console.log(`Tester ${parentNode.firstElementChild}`)
+                    console.log(`Tester ${editAction.firstElementChild.id}`)
                     console.log(`This is the id: ${editAction.parentNode.id} and this is the name: ${editAction.parentNode.name}`)
                     modalUpdate.style.display = "block"
                     
