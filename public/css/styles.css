@@ -27,7 +27,8 @@ a:hover {
 }
 
 #background-picture {
-    background-image: url('back-pic.jpg');
+    
+    background-image: url('/html/back-pic.jpg');
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
