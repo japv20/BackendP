@@ -158,35 +158,41 @@ document.addEventListener("DOMContentLoaded", (event) => {
             editButtons.forEach(editAction => {
                 editAction.addEventListener('click', (event) => {
                     event.preventDefault()
-                    console.log(editAction.firstElementChild)
-                    console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
-                    console.log(editAction.parentNode.outerText)
-                    // console.log(editAction.parentNode.firstElementChild)
-                    console.log(editAction.parentNode.h3)
-                    console.log(editAction.parentNode)
+                    // console.log(editAction.firstElementChild)
+                    // console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
+                    // console.log(editAction.parentNode.outerText)
+                    // // console.log(editAction.parentNode.firstElementChild)
+                    // console.log(editAction.parentNode.h3)
+                    // console.log(editAction.parentNode)
+
+                    fetch('http://188.166.172.132/meals')
+                    .then(response => response.json())
+                    .then ((data) => {
+                        console.log(data);
+                        const formContainer = document.querySelector('.update-content');
+                        formContainer.innerHTML = `
+                        <p> This is the id ${data.id} </p>
+                        <p> This is the name ${data.name} </p>
+                        <p> This is the category ${data.category} </p>
+                        `
 
                     modalUpdate.style.display = "block"
                     
                     // displayFormModal(editAction.parentNode.id)
-                    const formContainer = document.querySelector('.update-content');
-                    formContainer.innerHTML = `
-                    <p> This is the id ${editAction.parentNode.id} </p>
-                    <p> This is the name ${editAction.parentNode.firstElementChild.value} </p>
-                    <p> This is the category ${editAction.parentNode.secondElementChild} </p>
-                    `
-
-                    console.log(editAction)
-                    console.log(editAction.parentNode)
-                    console.log(editAction.parentNode.h3)
-                    console.log(editAction.firstChild)
-                    console.log(editAction.firstElementChild.value)
-
+                    // const formContainer = document.querySelector('.update-content');
+                    // formContainer.innerHTML = `
+                    // <p> This is the id ${editAction.parentNode.id} </p>
+                    // <p> This is the name ${editAction.parentNode.firstElementChild.value} </p>
+                    // <p> This is the category ${editAction.parentNode.secondElementChild} </p>
+                    // `
 
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
                             modalUpdate.style.display = "none";
                         } 
                     }
+
+                })
 
                 })
             })
