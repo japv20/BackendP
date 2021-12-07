@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             // two templates put them in a js folder 
             data.forEach(item => {
                 let templateForAnon = document.querySelector('#menus-for-anon')
-                templateForAnon = `
+                templateForAnon.innerHTML = `
                 <section class="meal" id="${item.id}">
                 <h3> ${item.name} </h3>
                 <p> <i> ${item.category} </i> </p>
