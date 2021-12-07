@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 editAction.addEventListener('click', (event) => {
                     event.preventDefault()
                     console.log(editAction.firstElementChild)
-                    console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
+                    console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
                     // console.log(editAction.parentNode.firstElementChild)
                     console.log(editAction.parentNode.h3)
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 //FIRSTELEMENTCHILD to get details
                 console.log(`you clicked me to delete ${deleteAction.parentNode.id} information`)
                 // deleteAction.parentNode.outerText
-                fetch('http://localhost:3000/delete/', {
+                fetch('http://188.166.172.132/delete/', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
