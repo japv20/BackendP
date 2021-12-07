@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(editAction.parentNode.outerText)
                     // console.log(editAction.parentNode.firstElementChild)
                     console.log(editAction.parentNode.h3)
-                    console.log(editAction.this)
+                    console.log(this.editAction)
                     console.log(this)
                     console.log(this.name)
 
