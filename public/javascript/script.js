@@ -132,7 +132,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     // console.log(editAction.parentElement)
                     modalUpdate.style.display = "block"
                     
-                    displayFormModal(editAction.parentNode.id)
+                    // displayFormModal(editAction.parentNode.id)
+                    const formContainer = document.querySelector('.update-content');
+                formContainer.innerHTML = `
+                <p> This is the id ${editAction.parentNode.id} </p>
+                <p> This is the name ${editAction.parentNode.firstElementChild} </p>
+                <p> This is the category ${editAction.parentNode.secondElementChild} </p>
+               
+                `
 
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
