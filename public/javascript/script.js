@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let listHolder = document.getElementById('menus');
             let roleListHolder = document.getElementById('menus-for-anon');
             data.forEach(item => {
+                console.log("donde estan mis meals")
                 listHolder.innerHTML += ` 
                 <section class="meal" id="${item.id}">
                 <h3> ${item.name} </h3>
