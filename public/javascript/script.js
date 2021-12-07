@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 console.log(supabase.auth.user())
 
                 if(supabase.auth.user().role == 'authenticated') {
+                    listHolder.style.display = "none";
                     console.log("hello")
                     roleListHolder.innerHTML += `
                     <section class="meal" id="${item.id}">
