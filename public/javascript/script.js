@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     
                     let all = editAction.children;
                     todoall = [... all]
-                    console.log(todoall)
+                    console.log(todoall.value)
 
                     modalUpdate.style.display = "block"
                     
