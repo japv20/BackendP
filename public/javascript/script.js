@@ -64,8 +64,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let listHolder = document.getElementById('menus');
             // two templates put them in a js folder 
             data.forEach(item => {
-                let templateForAnon = document.getElementById('menus-for-anon')
-                templateForAnon.innerHTML = `
+                let templateForAnon = `
                 <section class="meal" id="${item.id}">
                 <h3> ${item.name} </h3>
                 <p> <i> ${item.category} </i> </p>
@@ -74,21 +73,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
                 </section> `
 
-                // let templateForUser = `<section class="meal" id="${item.id}">
-                // <h3> ${item.name} </h3>
-                // <p> <i> ${item.category} </i> </p>
-                // <p> ${item.description} </p>
-                // <p> ${item.price} </p>
-                // <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
-                // <button class="edit"> Edit </button>
-                // <button class="delete"> Delete </button>
-                // </section> `
+                let templateForUser = `<section class="meal" id="${item.id}">
+                <h3> ${item.name} </h3>
+                <p> <i> ${item.category} </i> </p>
+                <p> ${item.description} </p>
+                <p> ${item.price} </p>
+                <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
+                <button class="edit"> Edit </button>
+                <button class="delete"> Delete </button>
+                </section> `
 
-                // if (supabase.auth.user().role = 'authenticated') {
-                //     listHolder.innerHTML += templateForUser;
-                // } else {
-                //     listHolder.innerHTML += templateForAnon;
-                // }
+                if (supabase.auth.user().role = 'authenticated') {
+                    listHolder.innerHTML += templateForUser;
+                } else {
+                    listHolder.innerHTML += templateForAnon;
+                }
 
             }); //closing data for each loop
 
