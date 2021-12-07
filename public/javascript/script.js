@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 listHolder.innerHTML += `
                 <section class="meal" id="${item.id}>
                 <h3> ${item.name} </h3>
+                </section>
                 `
                 // let templateForAnon = `
                 // <section class="meal" id="${item.id}">
