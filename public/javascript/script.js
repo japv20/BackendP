@@ -162,8 +162,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(editAction.parentNode.outerText)
                     console.log(editAction.parentNode.firstElementChild)
                     console.log(editAction.parentElement)
-                    console.log(editAction.children)
-                    console.log(editAction.contents())
+                    
+                    let all = editAction.children;
+                    todoall = [... all]
+                    console.log(todoall)
 
                     modalUpdate.style.display = "block"
                     
