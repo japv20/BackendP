@@ -170,13 +170,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     fetch('http://188.166.172.132/meals')
                     .then(response => response.json())
                     .then ((data) => {
-                        // console.log(data);
-                        const formContainer = document.querySelector('.update-content');
-                        formContainer.innerHTML = `
-                        <p> This is the id ${data.id} </p>
-                        <p> This is the name ${data.name} </p>
-                        <p> This is the category ${data.category} </p>
-                        `
+                        data.forEach((comida) => {
+                            console.log(comida)
+                            const formContainer = document.querySelector('.update-content');
+                            formContainer.innerHTML = `
+                            <p> This is the id ${comida.id} </p>
+                            <p> This is the name ${comida.name} </p>
+                            <p> This is the category ${comida.category} </p>
+                            `
+                        })
 
                     modalUpdate.style.display = "block"
                     
