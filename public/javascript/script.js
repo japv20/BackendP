@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             editButtons.forEach(editAction => {
                 editAction.addEventListener('click', (event) => {
                     event.preventDefault()
-                    console.log(editAction.firstElementChild())
+                    console.log(editButtons.firstElementChild)
                     console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
                     // console.log(editAction.parentNode.firstElementChild)
