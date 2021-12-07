@@ -73,6 +73,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
                 </section>
                 `
+
+                console.log(supabase.auth.user())
             }); // closing foreach loop
             // let anonHolder = document.getElementById('menus-for-anon')
             // two templates put them in a js folder 
