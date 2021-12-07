@@ -71,9 +71,6 @@ const meals = [
   }
 ]
 
-// Login with google
-
-
 // Login with magic link
 app.post('/login', async(req, res) => {
   console.log(`Email: ${req.body.email}`)
@@ -86,7 +83,6 @@ app.get('/meals', async(req, res) => {
   let {data: meals, error} = await supabase
   .from('meals')
   .select('*')
-  // console.log(supabase.auth.session())
   res.json(meals)
   // console.log(meals)
 
@@ -97,7 +93,6 @@ app.get('/meals', async(req, res) => {
 })
 
 app.post('/meals', async (req, res) => {
-  // let mealsInput = req.body.submission;
   let {data, error} = await supabase
   .from('meals')
   .insert([ {
@@ -107,7 +102,6 @@ app.post('/meals', async (req, res) => {
     price: req.body.price,
     picture: req.body.img_url,
     user_id: req.body.user
-  //   mealsInput
   } ])
   // res.json(meals)
   // console.log(
