@@ -128,6 +128,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     event.preventDefault()
                     console.log(`you clicked me to delete ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
+                    console.log(editAction.parentNode)
                     modalUpdate.style.display = "block"
                     
                     getMealID = editAction.parentNode.id
@@ -138,10 +139,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             modalUpdate.style.display = "none";
                     } }
                     
-                    closeModal.addEventListener('click', e => {
-                        e.preventDefault()
-                        modalUpdate.style.display = "none"
-                    })
+                    // closeModal.addEventListener('click', e => {
+                    //     e.preventDefault()
+                    //     modalUpdate.style.display = "none"
+                    // })
                 })
             })
 
