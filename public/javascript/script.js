@@ -177,6 +177,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     <p> This is the image ${editAction.parentNode.lastElementChild.innerHTML} </p>
                     `
 
+                    console.log(parentNode.childNodes)
+
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
                             modalUpdate.style.display = "none";
