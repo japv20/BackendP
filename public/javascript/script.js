@@ -25,19 +25,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     let supabaseUser = supabase.auth.user()
     console.log(supabaseUser)
-    console.log(supabaseUser.identities[0].identity_data.name)
-    let userName = supabaseUser.identities[0].identity_data.name
 
-    // import userSalute  from './class-module';
-    // const userBienvenida = userSalute;
+    // console.log(supabaseUser.identities[0].identity_data.name)
+    // let userName = supabaseUser.identities[0].identity_data.name
+
+    // // import userSalute  from './class-module';
+    // // const userBienvenida = userSalute;
    
-    class userSalute {
-        constructor(name){
-        this.name = name
-        }
-    }
-    let welcomeUser = new userSalute(userName);
-    console.log(`Welcome back ${welcomeUser.name}`);
+    // class userSalute {
+    //     constructor(name){
+    //     this.name = name
+    //     }
+    // }
+    // let welcomeUser = new userSalute(userName);
+    // console.log(`Welcome back ${welcomeUser.name}`);
 
     // Magic link sign up
     const userToLogIn = document.getElementById('user-login');
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log("hello")
         console.log(`This is the email: ${emailAddress.value}`)
 
-        fetch('http://188.166.172.132/login', {
+        fetch('http://localhost:3000/login', {
             headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
@@ -66,79 +67,60 @@ document.addEventListener("DOMContentLoaded", (event) => {
     })
 
     // Calling API meals
-    fetch('http://188.166.172.132/meals')
+    fetch('http://localhost:3000/meals')
     .then(response => response.json())
         .then ((data) => {
             console.log(data); // array of meals
             // endpoint that passes the id
             // group them by category 
-            
-            //console.log(supabase.auth.user().role) // console.log role of current user
-            
+
+            // console.log(supabase.auth.session())
+            // let userSession = supabase.auth.session;
+            // if (userSession.value == null) {
+            //     console.log("i am null")
+            // }
+    
             let listHolder = document.getElementById('menus');
             let roleListHolder = document.getElementById('menus-for-role');
-            data.forEach(item => {
-                // console.log("donde estan mis meals")
-                listHolder.innerHTML += ` 
-                <section class="meal" id="${item.id}">
-                <h3> ${item.name} </h3>
-                <p class="italic"> ${item.category} </p>
-                <p> ${item.description} </p>
-                <p> ${item.price} </p>
-                <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
+            function dataForOwners(mealInfo) {
+                roleListHolder.innerHTML += `
+                <section class="meal" id="${mealInfo.id}">
+                <h3> ${mealInfo.name} </h3>
+                <p class="italic"> ${mealInfo.category} </p>
+                <p> ${mealInfo.description} </p>
+                <p> £${mealInfo.price} </p>
+                <img class="picture-container" src=${mealInfo.picture} alt="${mealInfo.name}"/> <br>
+                <button class="edit"> Edit </button>
+                <button class="delete"> Delete </button>
                 </section>
                 `
-                if(supabase.auth.user().role == 'authenticated') {
-                    // console.log("estoy funcionando sorros")
-                    listHolder.style.display = "none";
-                    console.log("hello")
-                    roleListHolder.innerHTML += `
-                    <section class="meal" id="${item.id}">
-                    <h3> ${item.name} </h3>
-                    <p class="italic"> ${item.category} </p>
-                    <p> ${item.description} </p>
-                    <p> ${item.price} </p>
-                    <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
-                    <button class="edit"> Edit </button>
-                    <button class="delete"> Delete </button>
-                    </section>
-                    `
+            }
+
+            function dataForAll(mealData) {
+                listHolder.innerHTML += ` 
+                <section class="meal" id="${mealData.id}">
+                <h3> ${mealData.name} </h3>
+                <p class="italic"> ${mealData.category} </p>
+                <p> ${mealData.description} </p>
+                <p> £${mealData.price} </p>
+                <img class="picture-container" src=${mealData.picture} alt="${mealData.name}"/> <br>
+                </section>
+                `
+            }
+
+            data.forEach(item => {
+
+                console.log(supabaseUser)
+                if (supabaseUser !== 'null') {
+
+                    console.log ("Hello stranger")
                 }
+                else {
+                    console.log("Hello no stranger")
+                }
+
+                dataForOwners(item)
             }); // closing foreach loop
-
-            // let anonHolder = document.getElementById('menus-for-anon')
-            // two templates put them in a js folder 
-            // data.forEach(item => {                
-            //     let templateForAnon = `
-            //     <section class="meal" id="${item.id}">
-            //     <h3> ${item.name} </h3>
-            //     <p> <i> ${item.category} </i> </p>
-            //     <p> ${item.description} </p>
-            //     <p> ${item.price} </p>
-            //     <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
-            //     </section> `
-
-            //     let templateForUser = `<section class="meal" id="${item.id}">
-            //     <h3> ${item.name} </h3>
-            //     <p> <i> ${item.category} </i> </p>
-            //     <p> ${item.description} </p>
-            //     <p> ${item.price} </p>
-            //     <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
-            //     <button class="edit"> Edit </button>
-            //     <button class="delete"> Delete </button>
-            //     </section> `
-
-            //     // anonHolder.innerHTML += templateForAnon
-
-            //     if (supabase.auth.user().role = 'authenticated') {
-            //         listHolder.innerHTML += templateForUser;
-            //         // anonHolder.style.display = "none";
-            //     } 
-            //     else {
-            //         listHolder.innerHTML += templateForAnon;
-            //     }
-
-            // }); //closing data for each loop
 
             const logoutButton = document.getElementById('logout')
             console.log(logoutButton)
@@ -164,7 +146,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     event.preventDefault()
                     console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
-                    // console.log(editAction.parentNode.childNodes[10].innerHTML)
                     console.log(`Category ${editAction.parentNode.childNodes[3].innerHTML}`)
                     console.log(`Name ${editAction.parentNode.childNodes[1].innerHTML}`)
                     console.log(`Description ${editAction.parentNode.childNodes[5].innerHTML}`)
@@ -173,7 +154,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                     modalUpdate.style.display = "block"
                     
-                    // displayFormModal(editAction.parentNode.id)
                     const formContainer = document.querySelector('.update-content');
                     formContainer.innerHTML = `
                     <p> Element id: ${editAction.parentNode.id} </p>
@@ -208,7 +188,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                         console.log(newCategory, newName, newDescription, newPrice, newImage)
 
-                        fetch('http://188.166.172.132/meals', {
+                        fetch('http://localhost:3000/meals', {
                             headers: {
                                 'Accept':'application/json',
                                 'Content-Type':'application/json'
@@ -218,7 +198,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         })
                     location.reload()
                     })
-                    console.log(editAction.parentNode.childNodes) 
 
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
@@ -230,15 +209,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
              // Get delete buttons
             let deleteButtonsC = document.getElementsByClassName('delete'); // console.log(deleteButtonsC)
-            const deleteButtons = [... deleteButtonsC]
-            // console.log(deleteButtons)
+            const deleteButtons = [... deleteButtonsC] // console.log(deleteButtons)
             deleteButtons.forEach(deleteAction => {
             deleteAction.addEventListener('click', (event) => {
                 event.preventDefault();
-                //FIRSTELEMENTCHILD to get details
                 console.log(`you clicked me to delete ${deleteAction.parentNode.id} information`)
                 // deleteAction.parentNode.outerText
-                fetch('http://188.166.172.132/delete/', {
+                fetch('http://localhost:3000/delete/', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
@@ -264,11 +241,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         let mealDescription = document.getElementById('inputDescription').value;
         let mealPrice = document.getElementById('inputPrice').value;
         let mealImage = document.getElementById('inputImg').value;
-        // let mealImage = document.getElementById('inputImg').value
-
         
-        
-        fetch('http://188.166.172.132/meals', {
+        fetch('http://localhost:3000/meals', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'

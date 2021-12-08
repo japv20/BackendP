@@ -60,8 +60,9 @@ i:hover {
     color: white;
 }
 
-#menu {
-    margin-top: 110px;
+#about-us {
+    margin-top: 120px;
+    text-align: center;
 }
 
 h1 {
@@ -127,11 +128,10 @@ button {
     justify-content: space-around;
     align-items: baseline;
     align-content: center;
-    gap: 10px 10px;
+    gap: 12px 12px;
 }
 
 .meal {
-    /* background-color: cornflowerblue; */
     min-width: 300px;
     min-height: 300px;
     max-width: 400px;
@@ -144,8 +144,9 @@ button {
 }
 
 .picture-container {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
+    box-shadow: 5px -10px #f57d63;
 }
 
 /* On screeens that are 900px or less, set the background to blue */
@@ -197,11 +198,13 @@ button {
     }
 
     #menus, #menus-for-role {
-        gap: 15px 15px;
+        gap: 18px 18px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 
     .meal {
-        font-size: var(--large-size);
+        font-size: 16px;
         min-width: 400px;
         min-height: 400px;
         max-width: 600px;
@@ -215,5 +218,10 @@ button {
 
     #addForm {
         margin-left: 10%;
+    }
+
+    #about-us p {
+        display: inline;
+        margin-left: 15px;
     }
 }

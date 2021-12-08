@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log("hello")
         console.log(`This is the email: ${emailAddress.value}`)
 
-        fetch('http://188.166.172.132/login', {
+        fetch('http://localhost:3000/login', {
             headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     })
 
     // Calling API meals
-    fetch('http://188.166.172.132/meals')
+    fetch('http://localhost:3000/meals')
     .then(response => response.json())
         .then ((data) => {
             console.log(data); // array of meals
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 //FIRSTELEMENTCHILD to get details
                 console.log(`you clicked me to delete ${deleteAction.parentNode.id} information`)
                 // deleteAction.parentNode.outerText
-                fetch('http://188.166.172.132/delete/', {
+                fetch('http://localhost:3000/delete/', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         let mealPrice = document.getElementById('inputPrice').value;
         let mealImage = document.getElementById('inputImg').value;
     
-        fetch('http://188.166.172.132/meals', {
+        fetch('http://localhost:3000/meals', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
