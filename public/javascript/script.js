@@ -172,8 +172,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const formContainer = document.querySelector('.update-content');
                     formContainer.innerHTML = `
                     <p> This is the id ${editAction.parentNode.id} </p>
-                    <p> This is the name ${editAction.parentNode.name} </p>
-                    <p> This is the category ${editAction.parentNode.description} </p>
+                    <p> This is the name ${editAction.parentNode.firstElementChild.value} </p>
+                    <p> This is the category ${editAction.parentNode.secondElementChild.value} </p>
                     `
 
                     window.onclick = function(event) {
