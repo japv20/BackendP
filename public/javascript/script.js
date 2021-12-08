@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     <p> This is the image ${editAction.parentNode.lastElementChild.innerHTML} </p>
                     `
 
-                    console.log(editAction.parentNode.childNodes[0])
+                    console.log(editAction.parentNode.childNodes[0].innerHTML)
 
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
