@@ -76,7 +76,8 @@ app.post('/login', async(req, res) => {
   console.log(`Email: ${req.body.email}`)
   const { user, session, error } = await supabase.auth.signIn({
     email: req.body.email
-  })
+  });
+  console.log(session)
 })
 
 app.get('/meals', async(req, res) => {
@@ -120,3 +121,17 @@ app.delete('/delete', async (req,res) => {
   console.log({data,error})
 })
 
+app.put('/meals', async (req, res) => {
+  let {data, error} = await supabase
+  .from('meals')
+  .update([ {
+    category: req.body.category,
+    name: req.body.plate,
+    description: req.body.description,
+    price: req.body.price,
+    picture: req.body.img_url,
+    user_id: req.body.user
+  } ])
+  .match({ 'id': req.body.id})
+  console.log({data,error})
+})

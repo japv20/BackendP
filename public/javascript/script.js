@@ -23,7 +23,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
         signInGoogle()
     })
 
-    console.log(supabase.auth.user())
+    let supabaseUser = supabase.auth.user()
+    console.log(supabaseUser)
+    console.log(supabaseUser.identities[0].identity_data.name)
+    let userName = supabaseUser.identities[0].identity_data.name
+
+    // import userSalute  from './class-module';
+    // const userBienvenida = userSalute;
+   
+    class userSalute {
+        constructor(name){
+        this.name = name
+        }
+    }
+    let welcomeUser = new userSalute(userName);
+    console.log(`Welcome back ${welcomeUser.name}`);
 
     // Magic link sign up
     const userToLogIn = document.getElementById('user-login');
@@ -52,7 +66,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     })
 
     // Calling API meals
-    fetch('http://188.166.172.132/meals')
+    // fetch('http://localhost:3000/meals')
+    fetch('http://localhost:3000/meals')
     .then(response => response.json())
         .then ((data) => {
             console.log(data); // array of meals
@@ -62,13 +77,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
             //console.log(supabase.auth.user().role) // console.log role of current user
             
             let listHolder = document.getElementById('menus');
-            let roleListHolder = document.getElementById('menus-for-anon');
+            let roleListHolder = document.getElementById('menus-for-role');
             data.forEach(item => {
                 // console.log("donde estan mis meals")
                 listHolder.innerHTML += ` 
                 <section class="meal" id="${item.id}">
                 <h3> ${item.name} </h3>
-                <p> <i> ${item.category} </p> </i>
+                <p class="italic"> ${item.category} </p>
                 <p> ${item.description} </p>
                 <p> ${item.price} </p>
                 <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
@@ -81,7 +96,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     roleListHolder.innerHTML += `
                     <section class="meal" id="${item.id}">
                     <h3> ${item.name} </h3>
-                    <p> <i> ${item.category} </p> </i>
+                    <p class="italic"> ${item.category} </p>
                     <p> ${item.description} </p>
                     <p> ${item.price} </p>
                     <img class="picture-container" src=${item.picture} alt="${item.name}"/> <br>
@@ -140,51 +155,77 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let TODONODE = [...TODO]
             console.log(TODONODE)
 
+            // Get modal
+            let modalUpdate = document.getElementById('updateModal');
             // Get EDIT buttons
             let editButtonsC = document.getElementsByClassName('edit') // console.log(editButtonsC)
             let editButtons = [... editButtonsC]; // console.log(editButtons)
-
-            // Get modal
-            let modalUpdate = document.getElementById('updateModal');
-            let closeModal = document.getElementsByClassName('close')[0]
-
-            function displayFormModal(byMealID) {
-                const formContainer = document.querySelector('.update-content');
-                formContainer.innerHTML = `
-                <span class="close">&times;</span>
-                <p> This is the id ${byMealID} </p>
-                <p> This is the tester ${editAction.parentNode.firstElementChild} </p>                
-                `
-            }
-
             editButtons.forEach(editAction => {
                 editAction.addEventListener('click', (event) => {
                     event.preventDefault()
-                    console.log(editAction.firstElementChild)
                     console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
-                    console.log(editAction.parentNode.h3)
-                    console.log(this.parentNode)
+                    // console.log(editAction.parentNode.childNodes[10].innerHTML)
+                    console.log(`Category ${editAction.parentNode.childNodes[3].innerHTML}`)
+                    console.log(`Name ${editAction.parentNode.childNodes[1].innerHTML}`)
+                    console.log(`Description ${editAction.parentNode.childNodes[5].innerHTML}`)
+                    console.log(`Price ${editAction.parentNode.childNodes[7].innerHTML}`)
+                    console.log(`Imagen ${editAction.parentNode.childNodes[9].innerHTML}`)
 
                     modalUpdate.style.display = "block"
                     
                     // displayFormModal(editAction.parentNode.id)
                     const formContainer = document.querySelector('.update-content');
                     formContainer.innerHTML = `
-                    <p> This is the id ${editAction.parentNode.id} </p>
-                    <p> This is the name ${editAction.parentNode.firstElementChild.innerHTML} </p>
-                    <p> This is the category ${editAction.parentNode.childNodes[0].innerHTML} </p>
-                    <p> This is the image ${editAction.parentNode.lastElementChild.innerHTML} </p>
+                    <p> Element id: ${editAction.parentNode.id} </p>
+                    <form method="PUT" id="updateForm>
+                    
+                    <label for="newCategory" id="newCategory"> Category: </label> <br>
+                    <input type="text" name="newCategory" id="newInputCategory" value="${editAction.parentNode.childNodes[3].innerHTML}"> <br>
+                    <label for="newPlate" id="newPlate"> Plate: </label> <br>
+                    <input type="text" name="newPlate" id="newInputPlate" value="${editAction.parentNode.childNodes[1].innerHTML}"> <br>
+                    <label for="newDescription" id="newDescription"> Description: </label> <br>
+                    <input type="text" name="newDescription" id="newInputDescription" value="${editAction.parentNode.childNodes[5].innerHTML}"> <br>
+                    <label for="newPrice" id="newPrice"> Price: </label> <br>
+                    <input type="text" name="newPrice" id="newInputPrice" value="${editAction.parentNode.childNodes[7].innerHTML}"> <br>
+                    <label for="newImage" id="newImage"> Image: </label> <br>
+                    <input type="text" name="newImage" id="newInputImage" value="${editAction.parentNode.childNodes[9].innerHTML}"> <br>
+                    
+                    <button id="update-submit" type="submit"> Save </button>
+                    </form>
                     `
 
-                    console.log(editAction.parentNode.childNodes[0].innerHTML)
+                    let updateBtn = document.querySelector('#update-submit')
+                    console.log(updateBtn)
+                    updateBtn.addEventListener('click', async(event) => {
+                        event.preventDefault()
+                        console.log("I have been clicked to edit")
+
+                        let newCategory = document.getElementById('newInputCategory').value
+                        let newName = document.getElementById('newInputPlate').value
+                        let newDescription = document.getElementById('newInputDescription').value
+                        let newPrice = document.getElementById('newInputPrice').value
+                        let newImage = document.getElementById('newInputImage').value
+
+                        console.log(newCategory, newName, newDescription, newPrice, newImage)
+
+                        fetch('http://localhost:3000/meals', {
+                            headers: {
+                                'Accept':'application/json',
+                                'Content-Type':'application/json'
+                            },
+                            method: 'PUT',
+                            body: JSON.stringify({id:editAction.parentNode.id,category:newCategory, plate:newName, description:newDescription, price:newPrice, img_url:newImage, user:supabase.auth.user().id})
+                        })
+                    location.reload()
+                    })
+                    console.log(editAction.parentNode.childNodes) 
 
                     window.onclick = function(event) {
                         if (event.target == modalUpdate) {
                             modalUpdate.style.display = "none";
                         } 
                     }
-
                 })
             })
 
@@ -198,7 +239,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 //FIRSTELEMENTCHILD to get details
                 console.log(`you clicked me to delete ${deleteAction.parentNode.id} information`)
                 // deleteAction.parentNode.outerText
-                fetch('http://188.166.172.132/delete/', {
+                fetch('http://localhost:3000/delete/', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
@@ -219,14 +260,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
     mealForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         console.log("I have been clicked")
-
         let mealCategory = document.getElementById('inputCategories').value
         let mealName = document.getElementById('inputDish').value;
         let mealDescription = document.getElementById('inputDescription').value;
         let mealPrice = document.getElementById('inputPrice').value;
         let mealImage = document.getElementById('inputImg').value;
-    
-        fetch('http://188.166.172.132/meals', {
+        // let mealImage = document.getElementById('inputImg').value
+
+        
+        
+        fetch('http://localhost:3000/meals', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
