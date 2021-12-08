@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 </section>
                 `
                 if(supabase.auth.user().role == 'authenticated') {
-                    console.log("estoy funcionando sorros")
+                    // console.log("estoy funcionando sorros")
                     listHolder.style.display = "none";
                     console.log("hello")
                     roleListHolder.innerHTML += `
@@ -172,8 +172,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const formContainer = document.querySelector('.update-content');
                     formContainer.innerHTML = `
                     <p> This is the id ${editAction.parentNode.id} </p>
-                    <p> This is the name ${editAction.parentNode.value} </p>
-                    <p> This is the category ${editAction.parentNode.secondElementChild} </p>
+                    <p> This is the name ${editAction.parentNode.name} </p>
+                    <p> This is the category ${editAction.parentNode.description} </p>
                     `
 
                     window.onclick = function(event) {
