@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let listHolder = document.getElementById('menus');
             let roleListHolder = document.getElementById('menus-for-anon');
             data.forEach(item => {
-                console.log("donde estan mis meals")
+                // console.log("donde estan mis meals")
                 listHolder.innerHTML += ` 
                 <section class="meal" id="${item.id}">
                 <h3> ${item.name} </h3>
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
                     console.log(editAction.parentNode.h3)
-                    console.log(this)
+                    console.log(this.parentNode)
 
                     modalUpdate.style.display = "block"
                     
