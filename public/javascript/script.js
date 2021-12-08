@@ -163,11 +163,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log(editAction.firstElementChild)
                     console.log(`you clicked me to edit ${editAction.parentNode.id} information`)
                     console.log(editAction.parentNode.outerText)
-                    // console.log(editAction.parentNode.firstElementChild)
                     console.log(editAction.parentNode.h3)
-                    console.log(this.editAction)
                     console.log(this)
-                    console.log(this.name)
 
                     modalUpdate.style.display = "block"
                     
@@ -175,7 +172,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     const formContainer = document.querySelector('.update-content');
                     formContainer.innerHTML = `
                     <p> This is the id ${editAction.parentNode.id} </p>
-                    <p> This is the name ${editAction.parentNode.firstElementChild.value} </p>
+                    <p> This is the name ${editAction.parentNode.value} </p>
                     <p> This is the category ${editAction.parentNode.secondElementChild} </p>
                     `
 
