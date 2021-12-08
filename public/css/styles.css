@@ -1,11 +1,13 @@
 :root {
     --header-size: 20px;
-    --nav-size: 14px;
+    --nav-size: 18px;
     --li-size: 16px;
+    --large-size: 18px;
 }
 
 body {
     margin: 2%;
+    background-color: #fabf77;
 }
 
 nav {
@@ -26,9 +28,16 @@ a:hover {
     text-decoration: underline;
 }
 
+#google-icon, #user-login {
+    font-size: var(--nav-size);
+}
+
+i:hover {
+    cursor: pointer;
+}
+
 #background-picture {
-    
-    background-image: url('/html/back-pic.jpg');
+    background-image: url('back-pic.jpg');
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
@@ -38,7 +47,8 @@ a:hover {
 
 #pic {
     width: 100%;
-    height: 70%;
+    height: 60%;
+    margin-right: 2%;
 }
 
 #user-form {
@@ -54,31 +64,15 @@ a:hover {
     margin-top: 110px;
 }
 
-i {
-    font-size: var(--nav-size);
-}
-
-i:hover {
-    cursor: pointer;
-}
-
 h1 {
     text-align: center;
     font-size: var(--header-size);
 }
 
-li {
+/* li {
     list-style-type: none;
     font-size: var(--li-size);
-}
-
-#eliminate{
-    font-size: 30px;
-}
-
-#eliminate:hover {
-    cursor: pointer;
-}
+} */
 
 #addForm {
     padding: 10px 10px 10px 10px;
@@ -126,15 +120,100 @@ button {
     vertical-align: center;
 }
 
-.close {
-    color: rgb(176, 176, 176);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+#menus, #menus-for-role {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: baseline;
+    align-content: center;
+    gap: 10px 10px;
 }
 
-.close:hover, .close:focus {
-    color: red;
-    text-decoration: none;
-    cursor: pointer;
+.meal {
+    /* background-color: cornflowerblue; */
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 400px;
+    max-height: 400px;
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.picture-container {
+    width: 200px;
+    height: 200px;
+}
+
+/* On screeens that are 900px or less, set the background to blue */
+
+@media screen and (min-width: 800px){
+    
+    nav a { 
+        font-size: var(--large-size);
+    }
+
+    #google-icon, #user-login {
+        font-size: var(--large-size);
+    }
+
+    #pic {
+        width: 80%;
+        height: 40%;
+        margin-left: 10%;
+        text-align: center;
+        background-position: center;
+    }
+
+    #restaurant {
+        margin-top: -130px;
+        color: white;
+        font-size: 28px;
+    }
+
+    #menu, h1 {
+        font-size: var(--large-size);
+    }
+
+    label {
+        font-size: var(--large-size);
+    }
+
+    input, select {
+        font-size: var(--large-size);
+    }
+
+    button {
+        font-size: var(--large-size);
+        padding: 8px 8px;
+        display: inline;
+    }
+
+    .update-content {
+        font-size: var(--large-size);
+    }
+
+    #menus, #menus-for-role {
+        gap: 15px 15px;
+    }
+
+    .meal {
+        font-size: var(--large-size);
+        min-width: 400px;
+        min-height: 400px;
+        max-width: 600px;
+        max-height: 600px;
+    }
+
+    .picture-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    #addForm {
+        margin-left: 10%;
+    }
 }

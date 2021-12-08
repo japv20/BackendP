@@ -18,7 +18,7 @@
             <a href="#location"> Location </a>
             <i class="fa fa-google" id="google-icon"></i>
             <i class="fa fa-user circle" id="user-login"></i>
-            <i class="fa fa-shopping-cart" id="open-cart"></i>
+            <!-- <i class="fa fa-shopping-cart" id="open-cart"></i> -->
         </nav>
 
         <img id="pic" src="back-pic.jpg">
@@ -46,14 +46,14 @@
         </div>
         <div id="menus">
         </div>
-        <div id="menus-for-anon"> </div>
+        <div id="menus-for-role"> </div>
 
 
         <h1 id="location"> Where to find us </h1>
         <p> Address </p>
         <h1> Add your favourite plate! </h1>
         
-        <form method="POST" id="addForm">
+        <form method="POST" id="addForm" enctype="multipart/form-data">
             <label for="category"> Category: </label> <br>
             <select name="categories" id="inputCategories">
                 <option value="Starters"> Starters </option>
@@ -71,7 +71,8 @@
             <input type="number" name="price" id="inputPrice"> <br>
             
             <label for="image-food"> Attach Image </label> <br>
-            <input type="file" name="picture" id="inputImg"> <br>
+            <!-- <input type="file" name="picture" id="inputImg"> <br> -->
+            <input type="text" name="picture" id="inputImg" accept="image/png, image/jpg" placeholder="Add image link"> <br>
             
             <button id="submition" type="submit"> Submit </button>
         </form>
