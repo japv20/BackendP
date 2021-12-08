@@ -173,7 +173,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     formContainer.innerHTML = `
                     <p> This is the id ${editAction.parentNode.id} </p>
                     <p> This is the name ${editAction.parentNode.firstElementChild.innerHTML} </p>
-                    <p> This is the category ${editAction.parentNode.name} </p>
+                    <p> This is the category ${editAction.parentNode.nextSibling.innerHTML} </p>
+                    <p> This is the image ${editAction.parentNode.lastElementChild.innerHTML} </p>
                     `
 
                     window.onclick = function(event) {
