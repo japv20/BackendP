@@ -69,11 +69,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             console.log(data); // array of meals
             // endpoint that passes the id
             // group them by category 
-            let categoria = data.category
-            console.log(categoria)
-
-            // const startersSection = document.getElementById('starters');
-            // if(data.category === 'Starters') {}
+            
             // console.log(supabase.auth.session())
             // let userSession = supabase.auth.session;
             // if (userSession.value == null) {
@@ -110,6 +106,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             data.forEach(item => {
 
+                let categoria = data.category
+            console.log(categoria)
+
+            // const startersSection = document.getElementById('starters');
+            // if(data.category === 'Starters') {}
                 // console.log(supabaseUser)
                 if (supabaseUser === "null") {
                     console.log ("Hello stranger")
