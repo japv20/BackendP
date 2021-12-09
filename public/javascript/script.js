@@ -231,6 +231,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     }) //closing dom content loaded
 
+    
+
     // Inserting data to supabase table
     const mealForm = document.querySelector('#addForm')
     mealForm.addEventListener('submit', async (event) => {
