@@ -106,11 +106,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             data.forEach(item => {
 
-                let categoria = data.category
-            console.log(categoria)
-
-            // const startersSection = document.getElementById('starters');
-            // if(data.category === 'Starters') {}
                 // console.log(supabaseUser)
                 if (supabaseUser === "null") {
                     console.log ("Hello stranger")
