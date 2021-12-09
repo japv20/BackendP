@@ -110,7 +110,7 @@ app.post('/meals', async (req, res) => {
   // )
   // console.log(meals)
   res.status(201).send('Plate added')
-  // console.log(data, error)
+  console.log(data, error)
 })
 
 app.delete('/delete', async (req,res) => {

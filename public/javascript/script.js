@@ -8,9 +8,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const { user, session, error } = await supabase.auth.signIn({
             provider: 'google', 
         }
-        // {
-        // redirectTo:'http://localhost:5500/html/welcome.html'
-        // }
         )
     }
 
@@ -67,7 +64,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     })
 
     // Calling API meals
-    fetch('http://localhost:3000/meals')
+    fetch('http://188.166.172.132/meals')
     .then(response => response.json())
         .then ((data) => {
             console.log(data); // array of meals
@@ -110,7 +107,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             data.forEach(item => {
 
-                console.log(supabaseUser)
+                // console.log(supabaseUser)
                 if (supabaseUser !== 'null') {
 
                     console.log ("Hello stranger")
@@ -188,7 +185,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                         console.log(newCategory, newName, newDescription, newPrice, newImage)
 
-                        fetch('http://localhost:3000/meals', {
+                        fetch('http://188.166.172.132/meals', {
                             headers: {
                                 'Accept':'application/json',
                                 'Content-Type':'application/json'
@@ -215,14 +212,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 event.preventDefault();
                 console.log(`you clicked me to delete ${deleteAction.parentNode.id} information`)
                 // deleteAction.parentNode.outerText
-                fetch('http://localhost:3000/delete/', {
+                fetch('http://188.166.172.132/delete/', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
                 },
                 method: 'DELETE',
-                body: JSON.stringify({id:deleteAction.parentNode.id}) 
-                
+                body: JSON.stringify({id:deleteAction.parentNode.id})
                 })
                 location.reload()
             })
@@ -230,8 +226,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         })
 
     }) //closing dom content loaded
-
-    
 
     // Inserting data to supabase table
     const mealForm = document.querySelector('#addForm')
@@ -244,7 +238,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         let mealPrice = document.getElementById('inputPrice').value;
         let mealImage = document.getElementById('inputImg').value;
         
-        fetch('http://localhost:3000/meals', {
+        fetch('http://188.166.172.132/meals', {
                 headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
@@ -254,3 +248,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
             })
         location.reload()
     })
+
+    // https://www.recetas-venezolanas.com/base/stock/Recipe/221-image/221-image_web.jpg
