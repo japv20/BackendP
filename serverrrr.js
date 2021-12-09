@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-app.get('localhost:3000', (req, res) => {
+app.get('188.166.172.132', (req, res) => {
     res.send('Successful response.');
 });
 

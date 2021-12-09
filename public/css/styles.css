@@ -128,14 +128,12 @@ button {
     justify-content: space-around;
     align-items: baseline;
     align-content: center;
-    gap: 12px 12px;
+    gap: 15px 15px;
 }
 
 .meal {
-    min-width: 300px;
-    min-height: 300px;
-    max-width: 400px;
-    max-height: 400px;
+    min-width: 450px;
+    min-height: 450px;
     text-align: center;
 }
 
@@ -144,8 +142,9 @@ button {
 }
 
 .picture-container {
-    width: 300px;
-    height: 300px;
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 350px;
     box-shadow: 5px -10px #f57d63;
 }
 
@@ -205,17 +204,15 @@ button {
 
     .meal {
         font-size: 16px;
-        min-width: 400px;
-        min-height: 400px;
-        max-width: 600px;
-        max-height: 600px;
+        min-width: 500px;
+        min-height: 500px;
     }
 
     .picture-container {
-        width: 300px;
-        height: 300px;
-        max-height: 350px;
-        max-width: 350px;
+        min-width: 380px;
+        min-height: 380px;
+        max-height: 500px;
+        max-width: 500px;
     }
 
     #addForm {

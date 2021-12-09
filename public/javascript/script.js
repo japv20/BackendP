@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const { user, session, error } = await supabase.auth.signIn({
             provider: 'google', 
         }
-        )
-    }
+    )}
 
     const { createClient } = supabase;
         supabase = createClient('https://nzbdfmiovbsqjwwhilhn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDM5ODI5NiwiZXhwIjoxOTQ5OTc0Mjk2fQ.KsfwqP7XECEHLB8NIv80D5KztYINq9mI73qzHMoneuE')
@@ -53,7 +52,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log("hello")
         console.log(`This is the email: ${emailAddress.value}`)
 
-        fetch('http://localhost:3000/login', {
+        fetch('http://188.166.172.132/login', {
             headers: {
                     'Accept':'application/json',
                     'Content-Type':'application/json'
@@ -85,7 +84,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <h3> ${mealInfo.name} </h3>
                 <p class="italic"> ${mealInfo.category} </p>
                 <p> ${mealInfo.description} </p>
-                <p> £${mealInfo.price} </p>
+                <p> ${mealInfo.price} </p>
                 <img class="picture-container" src=${mealInfo.picture} alt="${mealInfo.name}"/> <br>
                 <button class="edit"> Edit </button>
                 <button class="delete"> Delete </button>
@@ -99,7 +98,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 <h3> ${mealData.name} </h3>
                 <p class="italic"> ${mealData.category} </p>
                 <p> ${mealData.description} </p>
-                <p> £${mealData.price} </p>
+                <p> ${mealData.price} </p>
                 <img class="picture-container" src=${mealData.picture} alt="${mealData.name}"/> <br>
                 </section>
                 `
@@ -108,14 +107,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
             data.forEach(item => {
 
                 // console.log(supabaseUser)
-                if (supabaseUser !== 'null') {
-
+                if (supabaseUser === "null") {
                     console.log ("Hello stranger")
                 }
                 else {
                     console.log("Hello no stranger")
                 }
-
                 dataForOwners(item)
             }); // closing foreach loop
 
