@@ -22,15 +22,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let supabaseUser = supabase.auth.user()
     console.log(supabaseUser)
 
-    async function getUserForTheMillionTime() {
-    const { user, error } = await supabase.auth.api.getUser(
-        'ACCESS_TOKEN_JWT',
-    )
-    console.log({user,error})
-    }
-
-    getUserForTheMillionTime()
-
     // console.log(supabaseUser.identities[0].identity_data.name)
     // let userName = supabaseUser.identities[0].identity_data.name
 
