@@ -5,6 +5,8 @@
     --large-size: 18px;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap');
+
 body {
     margin: 2%;
     background-color: #fabf77;
@@ -28,7 +30,18 @@ a:hover {
     text-decoration: underline;
 }
 
-#google-icon, #user-login {
+#saludo {
+    text-align: center;
+    font-style: italic;
+    padding: 1%;
+}
+
+address {
+    text-align: center;
+    font-size: 16px;
+}
+
+#google-icon {
     font-size: var(--nav-size);
 }
 
@@ -68,12 +81,8 @@ i:hover {
 h1 {
     text-align: center;
     font-size: var(--header-size);
+    font-family: 'Slabo 27px', serif;
 }
-
-/* li {
-    list-style-type: none;
-    font-size: var(--li-size);
-} */
 
 #addForm {
     padding: 10px 10px 10px 10px;
@@ -121,14 +130,19 @@ button {
     vertical-align: center;
 }
 
-#menus, #menus-for-role {
+#menus, #menus-for-role, .starters-main, .main-main, .desserts-main, .drinks-main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: baseline;
     align-content: center;
     gap: 15px 15px;
+}
+
+#starters, #main, #desserts, #drinks {
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Slabo 27px', serif;
 }
 
 .meal {
@@ -146,6 +160,10 @@ button {
     min-height: 300px;
     max-width: 350px;
     box-shadow: 5px -10px #f57d63;
+}
+
+.edit, .delete {
+    display: none;
 }
 
 /* On screeens that are 900px or less, set the background to blue */
@@ -204,7 +222,7 @@ button {
 
     .meal {
         font-size: 16px;
-        min-width: 500px;
+        max-width: 500px;
         min-height: 500px;
     }
 

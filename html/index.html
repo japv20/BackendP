@@ -15,13 +15,12 @@
         <nav>
             <a href="#home"> Home </a>
             <a href="#aboutus"> About Us </a>
-            <a href="#menu"> Menu </a>
+            <a href="#menus"> Menu </a>
             <a href="#location"> Contact Us </a>
             <i class="fa fa-google" id="google-icon"></i>
-            <i class="fa fa-user circle" id="user-login"></i>
             <i class="fa fa-sign-out" id="logout"></i>
-            <!-- <i class="fa fa-shopping-cart" id="open-cart"></i> -->
         </nav>
+        <section id="saludo"> </section>
 
         <img id="pic" src="back-pic.jpg">
 
@@ -34,7 +33,7 @@
         <p> Kei and Diluc is a family business, joining together the magic from two brothers in their kitchen! <br>
             We hope that you can visit us and delight our plates and drinks. </p>
         </section>
-        <h1 id="menu"> Menu </h1>
+        <!-- <h1 id="menu"> Menu </h1> -->
         <div id="user-form">
             <form>
                 <label for="email"> Email: </label>
@@ -50,10 +49,10 @@
             </div>
         </div>
         <div id="menus">
-            <!-- <section id="starters"> Starters </section>
-            <section id="main"> Main </section>
-            <section id="desserts"> Desserts </section>
-            <section id="drinks"> Drinks </section> -->
+            <br> <section id="starters" class="starters-main"> Starters </section>
+            <section id="main" class="main-main"> Main </section>
+            <section id="desserts" class="desserts-main"> Desserts </section>
+            <section id="drinks" class="drinks-main"> Drinks </section>
         </div>
         <div id="menus-for-role"> </div>
 
@@ -63,11 +62,9 @@
             Phone number: 078 2799 2242
             Email address: keiluc@gmail.com
         </address>
-        <!-- <p> Address </p> -->
-        <h1> Add a new plate! </h1>
-        <!-- <button id="btnAdd"> Add a Meal </button> -->
-        
+
         <form method="POST" id="addForm" enctype="multipart/form-data">
+            <h1> Add a new plate! </h1>
             <label for="category"> Category: </label> <br>
             <select name="categories" id="inputCategories">
                 <option value="Starters"> Starters </option>

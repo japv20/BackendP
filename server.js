@@ -71,15 +71,6 @@ const meals = [
   }
 ]
 
-// Login with magic link
-app.post('/login', async(req, res) => {
-  console.log(`Email: ${req.body.email}`)
-  const { user, session, error } = await supabase.auth.signIn({
-    email: req.body.email
-  });
-  console.log(session)
-})
-
 app.get('/meals', async(req, res) => {
   let {data: meals, error} = await supabase
   .from('meals')
